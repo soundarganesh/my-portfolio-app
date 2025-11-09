@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Montserrat } from "next/font/google";
+import { LXGW_WenKai_TC } from "next/font/google"; // Chinese font, used as a fallback for Lubrifont SC-like style
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+import "./globals.css";
+import { Header } from "@/src/components/layout/Header";
+
+// Load the fonts
+const montserrat = Montserrat({
   subsets: ["latin"],
+  variable: "--font-primary",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lubrifont = LXGW_WenKai_TC({
   subsets: ["latin"],
+  variable: "--font-secondary",
+  weight: "400",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={`${montserrat.variable} ${lubrifont.variable} scroll-smooth`}>
+      <body>
+        <Header />
+        <main className="pt-20">
+          {children}
+        </main>
       </body>
     </html>
   );
