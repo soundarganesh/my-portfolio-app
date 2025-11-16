@@ -1,11 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-/* Root-level design tokens (light theme) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --light-pink: #e685ac;
+  --light-green: #99ca92;
+  --light-blue: #eefcfe;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,20 +15,19 @@
   }
 }
 
-/* Global body styles */
 body {
-  background-color: var(--background);
+  background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-primary, sans-serif);
+  font-family: var(--font-primary);
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-
 }
 
-html, body {
+html,
+body {
   overflow-y: scroll;
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -38,4 +37,12 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: 0 !important;
   display: none !important;
+}
+
+.font-primary {
+  font-family: var(--font-primary);
+}
+
+.font-secondary {
+  font-family: var(--font-secondary);
 }

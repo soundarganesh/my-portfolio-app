@@ -1,10 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-interface AboutSectionProps {}
+interface AboutProps {}
 
-const AboutSection: React.FC<AboutSectionProps> = () => {
-  return (
-    <div className="text-center">About</div>
-)};
+const AboutSection: React.FC<AboutProps> = () => {
+  return <div className='h-screen'>About</div>
+}
 
-export default AboutSection;
+export default AboutSection
