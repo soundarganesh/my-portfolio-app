@@ -3,6 +3,7 @@ import React from 'react'
 import Shape from '../common/Shape'
 import DotPattern from '../common/DotPattern'
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType'
+import { getYearsOfExperience } from '@/src/lib/utils'
 
 interface HomeProps {}
 
@@ -34,31 +35,29 @@ const HomeSection: React.FC<HomeProps> = () => {
         />
 
         <DotPattern
-          type='dot'
           size={5}
           direction={isMobile() ? 0 : 90}
           row1Color='#d33673'
           row2Color='#edd31e'
           classes={`absolute ${isMobile() ? `top-[5%] right-[5%]` : `top-[15%] right-0`}`}
         />
-        <DotPattern
-          type='dot'
-          size={5}
-          direction={0}
-          row1Color='#d33673'
-          row2Color='#99ca92'
-          classes='absolute bottom-[5%] left-[3%]'
-        />
+        <DotPattern size={5} row1Color='#d33673' row2Color='#99ca92' classes='absolute bottom-[5%] left-[3%]' />
         <Shape
           type='triangle'
           size={isMobile() ? 30 : 40}
           color='#d33673'
           classes='absolute bottom-[3%] left-[25%] lg:left-[10%]'
-          direction={0}
         />
 
-        <div className='absolute top-[10%] right-[5%] z-0 h-[80%] w-[50%] bg-[var(--light-blue)]'>
-          {!isMobile() && <div />}
+        <div className='absolute top-[10%] right-[5%] z-0 h-[80%] w-[50%] bg-[var(--dark-blue)]'>
+          {!isMobile() && (
+            <div className='flex h-full items-center justify-center text-center text-[var(--light-blue)] opacity-10'>
+              <div>
+                <p className='text-[20rem] leading-none font-semibold'>{getYearsOfExperience()}+</p>
+                <p className='text-4xl font-bold'>YEARS</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

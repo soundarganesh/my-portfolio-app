@@ -4,10 +4,8 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
   return (
-    <header className='fixed w-full'>
-      {/* <section className='align-center container flex justify-center'>
-        Header
-      </section> */}
+    <header className='fixed z-100 w-full'>
+      <section className='align-center container flex justify-center'>{/* Header */}</section>
     </header>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface DotPatternProps {
-  type: 'dot' | 'triangle'
+  type?: 'dot' | 'triangle'
   size?: number
   row1Color?: string
   row2Color?: string
@@ -11,7 +11,7 @@ interface DotPatternProps {
 }
 
 const DotPattern: React.FC<DotPatternProps> = ({
-  type,
+  type = 'dot',
   size = 10,
   row1Color = '#000',
   row2Color = '#000',

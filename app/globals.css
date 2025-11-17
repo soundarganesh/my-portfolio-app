@@ -4,8 +4,14 @@
   --background: #ffffff;
   --foreground: #171717;
   --light-pink: #e685ac;
+  --pink: #f3b2cb;
   --light-green: #99ca92;
   --light-blue: #eefcfe;
+  --dark-blue: #6ec3e0;
+  --orange: #e46b4e;
+  --light-yellow: #f2edda;
+  --yellow: #e6ca11;
+  --yellow-2: #f0d87d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -45,4 +51,8 @@ body::-webkit-scrollbar {
 
 .font-secondary {
   font-family: var(--font-secondary);
+}
+
+.cus-text-align {
+  @apply px-[10%] text-sm;
 }
