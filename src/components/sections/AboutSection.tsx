@@ -19,7 +19,7 @@ const AboutSection: React.FC<AboutProps> = () => {
 
   return (
     <section className='relative h-screen pt-[10%] sm:pt-[7%]'>
-      <p className='px-[5%] text-4xl font-bold'>About Me</p>
+      <p className='px-[10%] text-2xl font-bold'>ABOUT ME</p>
       <div className='flex'>
         <div className='flex flex-col gap-6 py-6 sm:w-1/2'>
           <p className='cus-text-align'>
@@ -28,7 +28,7 @@ const AboutSection: React.FC<AboutProps> = () => {
             UI architecture, micro-frontends, and integrating GenAI, LLM APIs, and Python (FastAPI). Strong background
             in FinTech security, ADA compliance, and leading high-performance engineering teams.
           </p>
-          <div className='cus-text-align mr-[10%] bg-[#dbe5da] py-4'>
+          <div className='cus-text-align mr-[10%] linearGradient py-4'>
             <p className='text-xl font-bold'>EXPERIENCE</p>
             <div className='flex flex-col gap-2 p-4'>
               {experienceList &&
@@ -53,14 +53,14 @@ const AboutSection: React.FC<AboutProps> = () => {
         )}
       </div>
       {isMobile() && (
-        <div className='font-secondary text-md flex items-center justify-center font-bold'>
+        <div className='text-white text-md flex items-center justify-center font-bold'>
           <span
-            className='flex h-[7rem] w-[7rem] items-center bg-[var(--pink)] text-center'
+            className='flex h-[7rem] w-[7rem] items-center bg-[var(--light-purple)] text-center'
             onClick={() => downloadFile()}
           >
             Download Resume
           </span>
-          <span className='flex h-[7rem] w-[7rem] items-center bg-[var(--yellow-2)] text-center'>
+          <span className='flex h-[7rem] w-[7rem] items-center bg-[var(--purple)] text-center'>
             Download Cover Letter
           </span>
         </div>

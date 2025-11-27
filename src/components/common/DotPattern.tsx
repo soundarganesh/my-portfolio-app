@@ -43,7 +43,7 @@ const DotPattern: React.FC<DotPatternProps> = ({
 
   return (
     <div
-      className={`inline-flex flex-col gap-[6px] ${classes}`}
+      className={`flex flex-col gap-[6px] ${classes}`}
       style={{
         transform: `rotate(${direction}deg)`,
       }}

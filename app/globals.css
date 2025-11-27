@@ -16,6 +16,7 @@
   --light-purple: #cd91fd;
   --dark-purple: #4d0686;
   --pink: #821c8a;
+  --green: #dbe5da;
 }
 
 @media (prefers-color-scheme: dark) {
