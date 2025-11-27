@@ -22,7 +22,7 @@ const AboutSection: React.FC<AboutProps> = () => {
       <p className='px-[5%] text-4xl font-bold'>About Me</p>
       <div className='flex'>
         <div className='flex flex-col gap-6 py-6 sm:w-1/2'>
-          <p className='cus-text-align text-justify'>
+          <p className='cus-text-align'>
             Senior Software Engineer with {getYearsOfExperience()}+ years of experience in building scalable,
             user-centric web applications using Next.js/React.js and the MERN stack. Skilled in full-stack development,
             UI architecture, micro-frontends, and integrating GenAI, LLM APIs, and Python (FastAPI). Strong background
