@@ -65,21 +65,19 @@ interface HomeProps {}
 
 const HomeSection: React.FC<HomeProps> = () => {
   const device: DeviceType = useDeviceType()
-    const isMobile = () => device === 'mobile';
-const [isDarkMode, setIsDarkMode] = useState(false);
+  const isMobile = () => device === 'mobile'
+  const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
     // ✅ Safe: runs only in browser
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDarkMode(mediaQuery.matches);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    setIsDarkMode(mediaQuery.matches)
 
-    const handler = (event: MediaQueryListEvent) => setIsDarkMode(event.matches);
-    mediaQuery.addEventListener("change", handler);
+    const handler = (event: MediaQueryListEvent) => setIsDarkMode(event.matches)
+    mediaQuery.addEventListener('change', handler)
 
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
-
-
+    return () => mediaQuery.removeEventListener('change', handler)
+  }, [])
 
   const socialMedia = () => {
     return (
@@ -104,15 +102,16 @@ const [isDarkMode, setIsDarkMode] = useState(false);
       <div className='flex h-screen w-full divide-x-2 divide-[var(--primary-grey)]'>
         <div className='flex basis-[55%] flex-col'>
           <div className='basis-[15%] border-b-2 border-[var(--primary-grey)]'>
-
-            <p className='mr-[20%] ml-[15%] flex h-full items-center border-x-2 border-[var(--primary-grey)] pl-[10%] text-sm font-semibold tracking-wider text-[var(--secondary-grey)]'>
-              <span className="text-6xl text-var(--secondary) flex justify-center items-center text-center">*</span> GANESH PANDIAN
+            <p className='mr-[20%] ml-[15%] flex h-full items-center border-x-2 border-[var(--primary-grey)] text-sm font-semibold tracking-wider text-[var(--secondary-grey)]'>
+              <span className='text-var(--secondary) flex items-center justify-center pl-[10%] text-center text-4xl'>
+                *
+              </span>
+              &nbsp;GANESH PANDIAN
             </p>
           </div>
 
           {/* <div className={`bg-opacity-10 relative basis-[70%] ${isDarkMode ? `bg-[url(/bg4.jpg)]` : `bg-[url(/bg1.jpg)]`}  bg-cover`}> */}
-          <div className={`bg-opacity-10 relative basis-[70%] bg-[url(/bg1.jpg)] dark:bg-[url(/bg4.jpg)] bg-cover`}>
-            
+          <div className={`bg-opacity-10 relative basis-[70%] bg-[url(/bg1.jpg)] bg-cover dark:bg-[url(/bg4.jpg)]`}>
             <div className='absolute inset-0 bg-black/70 dark:bg-white/70' />
             <div className='relative z-20 flex h-full'>
               <div className='flex basis-[15%] items-end justify-center pb-[10%]'>{socialMedia()}</div>
@@ -126,8 +125,16 @@ const [isDarkMode, setIsDarkMode] = useState(false);
               <div className='basis-[20%]'></div>
             </div>
           </div>
-          <div className='basis-[15%] border-t-2 border-[var(--primary-grey)]'>
-            <div className='mr-[20%] ml-[15%] h-full border-x-2 border-[var(--primary-grey)]'></div>
+          <div className='flex basis-[15%] border-t-2 border-[var(--primary-grey)]'>
+            <div className='basis-[15%]' />
+            <div className='flex h-full basis-[65%] items-center border-x-2 border-[var(--primary-grey)] text-xs text-[var(--secondary-grey)]'>
+              <p className='pl-[10%] font-semibold tracking-wide'>
+                EVERY GREAT DESIGN BEGINS WITH AN EVEN BETTER STORY.
+              </p>
+            </div>
+            <div className='flex basis-[20%] items-center justify-center font-semibold text-[var(--secondary-grey)]'>
+              |&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|&nbsp;|
+            </div>
           </div>
         </div>
         <div className='flex basis-[45%] flex-col'>
@@ -147,12 +154,6 @@ const [isDarkMode, setIsDarkMode] = useState(false);
           <div className='basis-[15%] border-t-2 border-[var(--primary-grey)]'></div>
         </div>
       </div>
-      {/* <div className='absolute flex flex-col h-screen w-full items-center justify-center'>
-        <Parallax speed={-10}>PORTFOLIO</Parallax>
-      </div>
-      <div className='absolute flex flex-col h-screen w-full items-center justify-end'>
-        <Parallax speed={-10}>PORTFOLIO</Parallax>
-      </div> */}
     </section>
   )
 }
