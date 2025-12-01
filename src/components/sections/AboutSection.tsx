@@ -28,7 +28,7 @@ const AboutSection: React.FC<AboutProps> = () => {
             UI architecture, micro-frontends, and integrating GenAI, LLM APIs, and Python (FastAPI). Strong background
             in FinTech security, ADA compliance, and leading high-performance engineering teams.
           </p>
-          <div className='cus-text-align mr-[10%] linearGradient py-4'>
+          <div className='cus-text-align linearGradient mr-[10%] py-4'>
             <p className='text-xl font-bold'>EXPERIENCE</p>
             <div className='flex flex-col gap-2 p-4'>
               {experienceList &&
@@ -53,7 +53,7 @@ const AboutSection: React.FC<AboutProps> = () => {
         )}
       </div>
       {isMobile() && (
-        <div className='text-white text-md flex items-center justify-center font-bold'>
+        <div className='text-md flex items-center justify-center font-bold text-white'>
           <span
             className='flex h-[7rem] w-[7rem] items-center bg-[var(--light-purple)] text-center'
             onClick={() => downloadFile()}

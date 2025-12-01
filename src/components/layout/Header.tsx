@@ -4,10 +4,14 @@ interface HeaderProps {}
 
 const Header: React.FC<HeaderProps> = () => {
   return (
-    <header className='fixed z-100 w-full'>
-      <section className='align-center container flex justify-center'>{/* Header */}</section>
-    </header>
+    <section className='fixed right-0 z-100 flex h-full w-[10%] flex-col border-l-2 border-[var(--primary-grey)]'>
+      <div className='basis-[15%] border-b-2 border-[var(--primary-grey)]'></div>
+      <div className='basis-[70%]'></div>
+      <div className='basis-[15%] border-t-2 border-[var(--primary-grey)]'></div>
+    </section>
   )
 }
 
 export default Header
+
+//https://www.freepik.com/free-psd/luxury-real-estate-landing-page-template_54090549.htm#fromView=search&page=3&position=7&uuid=f2f8b7e3-1409-4536-9592-b4ca14e1eff4&query=architecture+website

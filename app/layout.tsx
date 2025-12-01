@@ -1,7 +1,9 @@
+'use client'
 import type { Metadata } from 'next'
 import { LXGW_WenKai_TC, Montserrat } from 'next/font/google'
 import './globals.css'
 import Header from '@/src/components/Layout/Header'
+import { ParallaxProvider } from 'react-scroll-parallax'
 
 // Load the fonts
 const montserrat = Montserrat({
@@ -17,10 +19,10 @@ const lubrifont = LXGW_WenKai_TC({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'Ganesh Pandian',
-  description: 'Portfolio application',
-}
+// export const metadata: Metadata = {
+//   title: 'Ganesh Pandian',
+//   description: 'Portfolio application',
+// }
 
 export default function RootLayout({
   children,
@@ -30,8 +32,10 @@ export default function RootLayout({
   return (
     <html lang='en' className={`${montserrat.variable} ${lubrifont.variable} scroll-smooth`}>
       <body>
-        <Header />
-        <main className=''>{children}</main>
+        <ParallaxProvider>
+          <Header />
+          <main className='h-screen w-[90%]'>{children}</main>
+        </ParallaxProvider>
       </body>
     </html>
   )

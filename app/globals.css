@@ -1,8 +1,12 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #000000;
+  --secondary: #ffffff;
+  --primary-grey: #2f2e30;
+  --secondary-grey: #bebdc2;
+  --golden: #b48c50;
+  --golden1: #a38c59;
   --light-pink: #e685ac;
   --pink: #f3b2cb;
   --light-green: #99ca92;
@@ -21,14 +25,17 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --secondary: #000000;
+    --primary: #ffffff;
+    --primary-grey: #bebdc2;
+  --secondary-grey: #2f2e30;
+  --golden: #b48c50;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--primary);
+  color: var(--secondary);
   /* font-family: var(--font-primary); */
   min-height: 100vh;
   width: 100%;
@@ -65,3 +72,25 @@ body::-webkit-scrollbar {
 .linearGradient {
   @apply bg-gradient-to-r from-[var(--light-purple)] to-[var(--purple)];
 }
+
+@keyframes fadeIn--10 {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg) scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-10deg) scale(1) translateY(0);
+  }
+}
+@keyframes fadeIn-20 {
+  from {
+    opacity: 0;
+    transform: rotate(20deg) scale(0.8) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(20deg) scale(1) translateY(0);
+  }
+}
+/* Repeat for each rotation value */
