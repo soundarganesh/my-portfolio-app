@@ -1,4 +1,4 @@
-import { experienceProp } from '../types/type'
+import { experienceProp, menuType } from '../types/type'
 
 export const experienceList: experienceProp[] = [
   {
@@ -20,5 +20,24 @@ export const experienceList: experienceProp[] = [
     name: ' IVTL Infoview Tech Pvt. Ltd',
     year: 2016,
     location: 'Chennai, India',
+  },
+]
+
+export const menuConfig: menuType[] = [
+  {
+    id: 'home',
+    title: 'Home',
+  },
+  {
+    id: 'about',
+    title: 'About',
+  },
+  {
+    id: 'works',
+    title: 'Works',
+  },
+  {
+    id: 'contact',
+    title: 'Contact',
   },
 ]

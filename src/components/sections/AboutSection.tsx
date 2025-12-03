@@ -1,5 +1,5 @@
 'use client'
-import { experienceList } from '@/src/lib/mock'
+import { experienceList } from '@/src/lib/constants'
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType'
 import { getYearsOfExperience } from '@/src/lib/utils'
 import React from 'react'
@@ -18,7 +18,7 @@ const AboutSection: React.FC<AboutProps> = () => {
   }
 
   return (
-    <section className='relative h-screen pt-[10%] sm:pt-[7%]'>
+    <section id={'about'} className='relative h-screen pt-[10%] sm:pt-[7%]'>
       <p className='px-[10%] text-2xl font-bold'>ABOUT ME</p>
       <div className='flex'>
         <div className='flex flex-col gap-6 py-6 sm:w-1/2'>
