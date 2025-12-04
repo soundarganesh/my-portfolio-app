@@ -5,7 +5,7 @@
   --secondary: #ffffff;
   --primary-grey: #2f2e30;
   --secondary-grey: #bebdc2;
-  --golden: #b48c50;
+  --golden: crimson;
   --golden1: #a38c59;
   --light-pink: #e685ac;
   --pink: #f3b2cb;
@@ -22,7 +22,7 @@
   --pink: #821c8a;
   --green: #dbe5da;
 }
-/* #822659 #b48c50 #ff3d00 #ffb847 */
+/* #822659 #b48c50 #ff3d00 #ffb847 cadetblue crimson darkcyan */
 @media (prefers-color-scheme: dark) {
   :root {
     --secondary: #000000;
@@ -30,6 +30,7 @@
     --primary-grey: #bebdc2;
     --secondary-grey: #2f2e30;
     --golden: #b48c50;
+    --golden: crimson;
   }
 }
 

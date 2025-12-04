@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
 import { getYearsOfExperience } from '@/src/lib/utils';
 import { FaGithub, FaLinkedin, FaMailBulk, FaTwitter } from 'react-icons/fa';
+import BorderDrawWrapper from '../common/AnimatedBorderDiv';
 
 interface HomeProps {}
 
@@ -54,7 +55,7 @@ const HomeSection: React.FC<HomeProps> = () => {
           <div className='flex basis-[55%] flex-col'>
             <div className='basis-[15%] border-b-2 border-[var(--primary-grey)]'>
               <p className='mr-[20%] ml-[15%] flex h-full items-center border-x-2 border-[var(--primary-grey)] text-sm font-bold tracking-wider text-[var(--secondary-grey)]'>
-                <span className='text-var(--secondary) flex items-center justify-center pl-[10%] text-center text-4xl'>
+                <span className='text-var(--golden) flex items-center justify-center pl-[10%] text-center text-4xl'>
                   *
                 </span>
                 &nbsp;GANESH PANDIAN
@@ -109,6 +110,24 @@ const HomeSection: React.FC<HomeProps> = () => {
           </div>
           <div className='flex basis-[20%] md:basis-[15%] border-t-2 border-[var(--primary-grey)] pt-[7%] md:basis-[15%]'>
             {isMobile && (
+//               <BorderDrawWrapper 
+//   direction="left" 
+//   color="bg-red-500" 
+//   size="w-1"
+//   className="p-8 w-64 h-32 bg-gray-100 rounded-md shadow-lg"
+// >
+//   <p className='pl-[10%] text-sm font-semibold tracking-wide text-[var(--secondary-grey)]'>
+//                 EVERY GREAT DESIGN BEGINS WITH AN EVEN BETTER STORY.
+//               </p>
+// </BorderDrawWrapper>
+/* <BorderDrawWrapper 
+  direction="bottom" 
+  color="bg-blue-500" 
+  size="h-[5px]"
+  className="mt-10 p-8 w-64 h-32 bg-white rounded-md shadow-lg"
+>
+  <p>Only the bottom border draws (right to left).</p>
+</BorderDrawWrapper> */
               <p className='pl-[10%] text-sm font-semibold tracking-wide text-[var(--secondary-grey)]'>
                 EVERY GREAT DESIGN BEGINS WITH AN EVEN BETTER STORY.
               </p>
