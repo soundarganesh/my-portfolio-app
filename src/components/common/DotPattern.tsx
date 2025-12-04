@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 interface DotPatternProps {
-  type?: 'dot' | 'triangle'
-  size?: number
-  row1Color?: string
-  row2Color?: string
-  direction?: number
-  classes?: string
-  count?: number
+  type?: 'dot' | 'triangle';
+  size?: number;
+  row1Color?: string;
+  row2Color?: string;
+  direction?: number;
+  classes?: string;
+  count?: number;
 }
 
 const DotPattern: React.FC<DotPatternProps> = ({
@@ -27,7 +27,7 @@ const DotPattern: React.FC<DotPatternProps> = ({
         backgroundColor: color,
         borderRadius: '999px',
         // transform: `rotate(${direction}deg)`
-      }
+      };
     }
 
     // triangle (inverted ▼)
@@ -38,8 +38,8 @@ const DotPattern: React.FC<DotPatternProps> = ({
       borderRight: `${size / 2}px solid transparent`,
       borderTop: `${size}px solid ${color}`, // inverted
       //   transform: `rotate(${direction}deg)`
-    }
-  }
+    };
+  };
 
   return (
     <div
@@ -67,7 +67,7 @@ const DotPattern: React.FC<DotPatternProps> = ({
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DotPattern
+export default DotPattern;

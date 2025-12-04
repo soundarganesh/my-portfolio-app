@@ -1,6 +1,6 @@
-import AboutSection from '@/src/components/sections/AboutSection'
-import HomeSection from '@/src/components/sections/HomeSection'
-import Image from 'next/image'
+import AboutSection from '@/src/components/sections/AboutSection';
+import HomeSection from '@/src/components/sections/HomeSection';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -8,5 +8,5 @@ export default function Home() {
       <HomeSection />
       <AboutSection />
     </main>
-  )
+  );
 }

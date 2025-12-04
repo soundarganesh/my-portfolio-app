@@ -22,7 +22,7 @@
   --pink: #821c8a;
   --green: #dbe5da;
 }
-
+/* #822659 #b48c50 #ff3d00 #ffb847 */
 @media (prefers-color-scheme: dark) {
   :root {
     --secondary: #000000;

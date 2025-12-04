@@ -1,19 +1,19 @@
-import React from 'react'
+import React from 'react';
 
-type ShapeType = 'circle' | 'square' | 'rectangle' | 'triangle'
+type ShapeType = 'circle' | 'square' | 'rectangle' | 'triangle';
 
 interface ShapeProps {
-  type: ShapeType
-  direction?: number
-  color?: string
-  size?: number
-  x?: number
-  y?: number
-  classes?: string // NEW prop
+  type: ShapeType;
+  direction?: number;
+  color?: string;
+  size?: number;
+  x?: number;
+  y?: number;
+  classes?: string; // NEW prop
 }
 
 const Shape: React.FC<ShapeProps> = ({ type, direction = 0, color, size = 100, x, y, classes = '' }) => {
-  const enableTransition = x !== undefined || y !== undefined
+  const enableTransition = x !== undefined || y !== undefined;
 
   const baseStyle: React.CSSProperties = {
     width: type === 'rectangle' ? size * 1.6 : size,
@@ -22,7 +22,7 @@ const Shape: React.FC<ShapeProps> = ({ type, direction = 0, color, size = 100, x
     transform: `rotate(${direction}deg) translate(${x ?? 0}px, ${y ?? 0}px)`,
     transition: enableTransition ? 'transform 2s ease-in-out' : 'none',
     clipPath: type === 'triangle' ? 'polygon(50% 0%, 0% 100%, 100% 100%)' : '',
-  }
+  };
 
   return (
     <div
@@ -42,7 +42,7 @@ const Shape: React.FC<ShapeProps> = ({ type, direction = 0, color, size = 100, x
         // }),
       }}
     />
-  )
-}
+  );
+};
 
-export default Shape
+export default Shape;

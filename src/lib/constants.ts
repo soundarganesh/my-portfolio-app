@@ -1,4 +1,4 @@
-import { experienceProp, menuType } from '../types/type'
+import { experienceProp, menuType } from '../types/type';
 
 export const experienceList: experienceProp[] = [
   {
@@ -21,7 +21,7 @@ export const experienceList: experienceProp[] = [
     year: 2016,
     location: 'Chennai, India',
   },
-]
+];
 
 export const menuConfig: menuType[] = [
   {
@@ -40,4 +40,4 @@ export const menuConfig: menuType[] = [
     id: 'contact',
     title: 'Contact',
   },
-]
+];

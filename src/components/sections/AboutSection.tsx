@@ -1,21 +1,21 @@
-'use client'
-import { experienceList } from '@/src/lib/constants'
-import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType'
-import { getYearsOfExperience } from '@/src/lib/utils'
-import React from 'react'
+'use client';
+import { experienceList } from '@/src/lib/constants';
+import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
+import { getYearsOfExperience } from '@/src/lib/utils';
+import React from 'react';
 
 interface AboutProps {}
 
 const AboutSection: React.FC<AboutProps> = () => {
-  const device: DeviceType = useDeviceType()
-  const isMobile = () => device === 'mobile'
+  const device: DeviceType = useDeviceType();
+  const isMobile = () => device === 'mobile';
 
   const downloadFile = (type?: string) => {
-    const link = document.createElement('a')
-    link.href = '/resume.pdf'
-    link.download = 'Ganesh_Pandian_Resume.pdf'
-    link.click()
-  }
+    const link = document.createElement('a');
+    link.href = '/resume.pdf';
+    link.download = 'Ganesh_Pandian_Resume.pdf';
+    link.click();
+  };
 
   return (
     <section id={'about'} className='relative h-screen pt-[10%] sm:pt-[7%]'>
@@ -66,7 +66,7 @@ const AboutSection: React.FC<AboutProps> = () => {
         </div>
       )}
     </section>
-  )
-}
+  );
+};
 
-export default AboutSection
+export default AboutSection;
