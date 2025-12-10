@@ -3,12 +3,14 @@ import { experienceList } from '@/src/lib/constants';
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
 import { getYearsOfExperience } from '@/src/lib/utils';
 import React from 'react';
+import { BorderWrapper } from '../common/BorderWrapper';
+import SwipeToAction from '../common/SwipeToAction';
 
 interface AboutProps {}
 
 const AboutSection: React.FC<AboutProps> = () => {
   const device: DeviceType = useDeviceType();
-  const isMobile = () => device === 'mobile';
+  const isMobile = device === 'mobile';
 
   const downloadFile = (type?: string) => {
     const link = document.createElement('a');
@@ -18,53 +20,19 @@ const AboutSection: React.FC<AboutProps> = () => {
   };
 
   return (
-    <section id={'about'} className='relative h-screen pt-[10%] sm:pt-[7%]'>
-      <p className='px-[10%] text-2xl font-bold'>ABOUT ME</p>
-      <div className='flex'>
-        <div className='flex flex-col gap-6 py-6 sm:w-1/2'>
-          <p className='cus-text-align'>
-            Senior Software Engineer with {getYearsOfExperience()}+ years of experience in building scalable,
-            user-centric web applications using Next.js/React.js and the MERN stack. Skilled in full-stack development,
-            UI architecture, micro-frontends, and integrating GenAI, LLM APIs, and Python (FastAPI). Strong background
-            in FinTech security, ADA compliance, and leading high-performance engineering teams.
-          </p>
-          <div className='cus-text-align linearGradient mr-[10%] py-4'>
-            <p className='text-xl font-bold'>EXPERIENCE</p>
-            <div className='flex flex-col gap-2 p-4'>
-              {experienceList &&
-                experienceList.map((exp, index) => (
-                  <div className='flex items-center gap-4'>
-                    <p className='text-xl font-semibold'>0{index + 1}</p>
-                    <div>
-                      <p>
-                        {exp?.name}, {exp?.location}
-                      </p>
-                      <p>{exp?.year}</p>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
+    <section id='about' className='relative h-full md:h-screen w-full flex flex-col'>
+      <p className='absolute text-8xl text-[var(--primary-grey)] md:pl-[11%] z-50'>02.</p>
+      <BorderWrapper class='w-full top-[15%]'/>
+      <BorderWrapper class='h-full left-[10%]'/>
+
+      <div className='basis-[55%] w-full flex items-center justify-center pl-[15%] pr-[10%] text-2xl tracking-wider font-bold text-[var(--golden)]'>ABOUT ME</div>
+      <div className='basis-[45%] p-[10%] pt-[15%] pl-[15%] md:pl-[20%] md:py-[5%] md:text-center flex gap-6 flex-col'>
+        <p>A self-driven Senior Front-End Engineer with {getYearsOfExperience()}+ years of experience building highly scalable, high-impact web solutions for diverse industries including Fintech and SaaS. While maintaining deep expertise in modern frontend architectures (React, Angular, Next.js), I have recently expanded my technical scope to Full Stack development with a focus on AI/LLM integration. Currently architecting AI-powered quality testing platforms and utilizing Python/FastAPI to bridge the gap between complex LLM agents and intuitive user interfaces. Passionate about solving complex business challenges by combining user-centric design with cutting-edge AI technologies.</p>
+        <div className='flex flex-col md:flex-row gap-6'>
+        <SwipeToAction text="Resume" />
+        <SwipeToAction text="Cover Letter" />
         </div>
-        {!isMobile() && (
-          <div>
-            <p>Quote</p>
-          </div>
-        )}
       </div>
-      {isMobile() && (
-        <div className='text-md flex items-center justify-center font-bold text-white'>
-          <span
-            className='flex h-[7rem] w-[7rem] items-center bg-[var(--light-purple)] text-center'
-            onClick={() => downloadFile()}
-          >
-            Download Resume
-          </span>
-          <span className='flex h-[7rem] w-[7rem] items-center bg-[var(--purple)] text-center'>
-            Download Cover Letter
-          </span>
-        </div>
-      )}
     </section>
   );
 };

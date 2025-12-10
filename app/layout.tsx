@@ -34,7 +34,7 @@ export default function RootLayout({
       <body>
         <ParallaxProvider>
           <Header />
-          <main className='mt-[20%] h-[90%] w-full md:m-0 md:h-screen md:w-[90%]'>{children}</main>
+          <main className='h-screen w-full'>{children}</main>
         </ParallaxProvider>
       </body>
     </html>

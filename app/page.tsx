@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className='h-screen w-full'>
+    <div className='mt-[20%] h-9/10 w-full md:m-0 md:h-screen md:w-[93%]'>
       <HomeSection />
       <AboutSection />
-    </main>
+    </div>
   );
 }

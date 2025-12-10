@@ -3,9 +3,10 @@
 :root {
   --primary: #000000;
   --secondary: #ffffff;
-  --primary-grey: #2f2e30;
+  --primary-grey: #181818;
   --secondary-grey: #bebdc2;
-  --golden: crimson;
+  --golden: #7e1f85;
+  --golden: #b48c50;
   --golden1: #a38c59;
   --light-pink: #e685ac;
   --pink: #f3b2cb;
@@ -22,15 +23,15 @@
   --pink: #821c8a;
   --green: #dbe5da;
 }
-/* #822659 #b48c50 #ff3d00 #ffb847 cadetblue crimson darkcyan */
+/* #822659 #b48c50 #ff3d00 #ffb847 cadetblue crimson darkcyan #2596be */
 @media (prefers-color-scheme: dark) {
   :root {
     --secondary: #000000;
     --primary: #ffffff;
-    --primary-grey: #bebdc2;
+    --primary-grey: #F5F5F5;
     --secondary-grey: #2f2e30;
+    
     --golden: #b48c50;
-    --golden: crimson;
   }
 }
 

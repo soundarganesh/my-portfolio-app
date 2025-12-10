@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { motion } from 'framer-motion';
 import { TfiClose } from 'react-icons/tfi';
+import { FaGithub, FaLinkedin, FaMailBulk, FaTwitter } from 'react-icons/fa';
+import { BorderWrapper } from '../common/BorderWrapper';
 
 interface HeaderProps {}
 
@@ -26,13 +28,35 @@ const Header: React.FC<HeaderProps> = () => {
     }
   };
 
+  const socialMedia = () => {
+      return (
+        <div className='flex flex-col space-y-6'>
+          <a
+            href='https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b'
+            className='text-gray-600 hover:text-blue-500'
+            target='_blank'
+          >
+            <FaLinkedin color='var(--secondary)' className='h-4 w-4'/>
+          </a>
+          <a href='https://github.com/soundarganesh' className='text-gray-600 hover:text-blue-500' target='_blank'>
+            <FaGithub color='var(--secondary)' className='h-4 w-4' />
+          </a>
+          <a href='mailto:soundar.ganesh@gmail.com' className='text-gray-600 hover:text-blue-500' target='_blank'>
+            <FaMailBulk color='var(--secondary)' className='h-4 w-4' />
+          </a>
+        </div>
+      );
+    };
+
   return (
-    <section className='fixed top-0 z-100 flex h-[10%] w-full border-b-2 border-[var(--primary-grey)] bg-[var(--primary)] md:right-0 md:h-full md:w-[10%] md:flex-col md:border-l-2'>
+    <section className='fixed top-0 z-100 flex h-[10%] w-full border-b-2 border-[var(--primary-grey)] bg-[var(--primary)] md:right-0 md:h-full md:w-[7%] md:flex-col md:border-l-2'>
       {isMobile ? (
-        <>
-          <div className='basis-[15%] border-r-2 border-[var(--primary-grey)]'></div>
-          <div className='basis-[65%]'>
-            <p className='flex h-full items-center pr-[15%] text-sm font-bold tracking-wider text-[var(--secondary-grey)]'>
+        <div className='relative flex h-full w-full'>
+          <BorderWrapper class='h-full left-[10%]'/>
+          <BorderWrapper class='h-full right-[20%]'/>
+          <div className='basis-[10%]' />
+          <div className='basis-[70%]'>
+            <p className='flex h-full items-center pr-[20%] text-sm font-bold tracking-wider text-[var(--secondary-grey)]'>
               <span className='flex items-center justify-center pl-[10%] text-center text-4xl text-[var(--golden)]'>
                 *
               </span>
@@ -40,16 +64,16 @@ const Header: React.FC<HeaderProps> = () => {
             </p>
           </div>
           <div
-            className='flex basis-[20%] items-center justify-center border-l-2 border-[var(--primary-grey)]'
+            className='flex basis-[20%] items-center justify-center'
             onClick={() => setOpenMenu(!openMenu)}
           >
             <CiMenuKebab size={25} />
           </div>
-        </>
+        </div>
       ) : (
-        <>
-          <div className='basis-[15%] border-b-2 border-[var(--primary-grey)]'></div>
-          <div className='flex basis-[70%] flex-col justify-between py-[40%]'>
+        <div className='relative h-full flex flex-col'>
+          <div className='basis-[30%] border-b-2 border-[var(--primary-grey)] flex items-center justify-center'>{socialMedia()}</div>
+          <div className='basis-[70%] flex flex-col justify-between py-[40%]'>
             {menuConfig.map((menu: menuType) => (
               <div
                 key={menu?.id}
@@ -60,8 +84,7 @@ const Header: React.FC<HeaderProps> = () => {
               </div>
             ))}
           </div>
-          <div className='basis-[15%] border-t-2 border-[var(--primary-grey)]'></div>
-        </>
+        </div>
       )}
       {openMenu && (
         <>
