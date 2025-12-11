@@ -20,17 +20,44 @@ const AboutSection: React.FC<AboutProps> = () => {
   };
 
   return (
-    <section id='about' className='relative h-full md:h-screen w-full flex flex-col'>
-      <p className='absolute text-8xl text-[var(--primary-grey)] md:pl-[11%] z-50'>02.</p>
-      <BorderWrapper class='w-full top-[15%]'/>
-      <BorderWrapper class='h-full left-[10%]'/>
-
-      <div className='basis-[55%] w-full flex items-center justify-center pl-[15%] pr-[10%] text-2xl tracking-wider font-bold text-[var(--golden)]'>ABOUT ME</div>
-      <div className='basis-[45%] p-[10%] pt-[15%] pl-[15%] md:pl-[20%] md:py-[5%] md:text-center flex gap-6 flex-col'>
-        <p>A self-driven Senior Front-End Engineer with {getYearsOfExperience()}+ years of experience building highly scalable, high-impact web solutions for diverse industries including Fintech and SaaS. While maintaining deep expertise in modern frontend architectures (React, Angular, Next.js), I have recently expanded my technical scope to Full Stack development with a focus on AI/LLM integration. Currently architecting AI-powered quality testing platforms and utilizing Python/FastAPI to bridge the gap between complex LLM agents and intuitive user interfaces. Passionate about solving complex business challenges by combining user-centric design with cutting-edge AI technologies.</p>
-        <div className='flex flex-col md:flex-row gap-6'>
-        <SwipeToAction text="Resume" />
-        <SwipeToAction text="Cover Letter" />
+    <section id='about' className='relative h-screen w-full pt-[20%] md:pt-0'>
+      {/* <div className='h-full w-full'> */}
+      <p className='absolute z-50 text-8xl text-[var(--primary-grey)] md:pl-[11%]'>02.</p>
+      <BorderWrapper class='top-[22%] md:top-[15%] w-full' />
+      <BorderWrapper class='left-[10%] h-full' />
+      {/* </div> */}
+      <div className='flex h-full w-full flex-col'>
+        <div className='flex items-center justify-center py-[10%] md:py-[3%] pr-[10%] pl-[15%] text-2xl font-bold tracking-wider'>
+          <p>ABOUT ME</p>
+        </div>
+        <div className='flex flex-col gap-8 md:gap-12 p-[10%] pl-[15%] md:py-[5%] md:pl-[20%] md:text-center text-base text-[var(--secondary-grey)] md:text-lg'>
+          <p className='tracking-wide'>
+            Senior Front-End Engineer with <b>{getYearsOfExperience()}+ years</b> of experience delivering scalable web solutions across Fintech and SaaS.
+            Expert in modern frontend frameworks (<b>React, Angular, Next.js</b>) and recently expanded into Full Stack
+            development with a focus on <b>AI/LLM integration</b>. Currently architecting AI-driven quality testing platforms
+            using <b>Python/FastAPI</b> to connect advanced LLM agents with intuitive user interfaces. Passionate about solving
+            complex business challenges through user-centric design and cutting-edge AI technologies.
+          </p>
+          <div className='flex flex-col gap-6 md:flex-row px-[7%]'>
+            <SwipeToAction text='Resume' />
+            <SwipeToAction text='Cover Letter' />
+          </div>
+          <div className='pt-[10%] md:pt-[5%] flex flex-col md:flex-row tracking-wide gap-8'>
+            <div className='flex flex-col gap-6'>
+              <p className='text-sm font-bold text-[var(--secondary-grey)]'>PUBLICATIONS</p>
+              <div className='px-[5%] border-1 border-[var(--primary-grey)] divide-y-1 divide-[var(--primary-grey)]'>
+              <p className='p-4'>Federated Learning: Privacy-First AI for Business Innovation (LTIMindtree)</p>
+              <p className='p-4'>AI Evaluation and Explainability using Agentic Workflow (LTIMindtree)</p>
+              </div>
+            </div>
+            <div className='flex flex-col gap-6'>
+              <p className='text-sm font-bold text-[var(--secondary-grey)]'>CERTIFICATIONS</p>
+              <div className='px-[5%] border-1 border-[var(--primary-grey)] divide-y-1 divide-[var(--primary-grey)]'>
+              <p className='p-4'>Microsoft Azure Fundamentals (AZ-900)</p>
+              {/* <p className='p-4'>AI Evaluation and Explainability using Agentic Workflow (LTIMindtree)</p> */}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -9,16 +9,16 @@ type BorderDirection = 'top' | 'right' | 'bottom' | 'left';
 interface BorderDrawWrapperProps extends HTMLMotionProps<'div'> {
   /** The content to be wrapped inside the animated div. */
   children: React.ReactNode;
-  
+
   /** Which border to animate: 'top', 'right', 'bottom', or 'left'. */
   direction: BorderDirection;
-  
+
   /** Tailwind CSS class for the border color (e.g., 'bg-nature-green-dark'). */
   color?: string;
-  
+
   /** Tailwind CSS class for the border thickness (e.g., 'w-[3px]' or 'h-[4px]'). */
   size?: string;
-  
+
   /** Duration of the drawing animation in seconds. */
   duration?: number;
 }
@@ -28,7 +28,7 @@ interface BorderDrawWrapperProps extends HTMLMotionProps<'div'> {
 const transition = (duration: number) => ({
   duration: duration,
   // Use cubic-bezier array for 'easeInOut' to satisfy TypeScript's Easing type
-  ease: [0.42, 0, 0.58, 1] as Easing, 
+  ease: [0.42, 0, 0.58, 1] as Easing,
 });
 
 // --- Component Logic ---
@@ -41,30 +41,27 @@ const BorderDrawWrapper: React.FC<BorderDrawWrapperProps> = ({
   duration = 1.5,
   ...rest
 }) => {
-
   // 1. Determine the border style, animation properties, and positioning based on direction
   const borderProps = useMemo(() => {
-    
     // Determine the dimension class (width or height) for Tailwind
     // Ensure size is normalized to width utility for consistent parsing
-    const thicknessClass = size.includes('w-') 
-      ? size 
-      : size.replace('h-', 'w-');
+    const thicknessClass = size.includes('w-') ? size : size.replace('h-', 'w-');
 
     // Determine the complementary dimension class for the line's thickness (height for horizontal)
-    const lineSizeClass = direction === 'top' || direction === 'bottom' 
-      ? thicknessClass.replace('w-', 'h-') // Use height for horizontal lines
-      : thicknessClass;                    // Use width for vertical lines
+    const lineSizeClass =
+      direction === 'top' || direction === 'bottom'
+        ? thicknessClass.replace('w-', 'h-') // Use height for horizontal lines
+        : thicknessClass; // Use width for vertical lines
 
     // Base class for the animated element
     const baseClass = `absolute ${color} ${lineSizeClass}`;
 
     // Properties for the <motion.div>
-    let props: { 
-      className: string; 
-      initial: any; 
-      animate: any; 
-      transition: any; 
+    let props: {
+      className: string;
+      initial: any;
+      animate: any;
+      transition: any;
     };
 
     switch (direction) {
@@ -105,48 +102,39 @@ const BorderDrawWrapper: React.FC<BorderDrawWrapperProps> = ({
           transition: transition(duration),
         };
         break;
-        
+
       default:
         // Fallback for safety, though TypeScript prevents this with the type
         props = {
-          className: 'hidden', 
-          initial: {}, 
-          animate: {}, 
-          transition: {} 
+          className: 'hidden',
+          initial: {},
+          animate: {},
+          transition: {},
         };
         break;
     }
-    
+
     return props;
   }, [direction, color, size, duration]);
-  
+
   const { className: borderClassName, initial, animate, transition: borderTransition } = borderProps;
 
   return (
     // This outer motion.div is the element whose border is being animated.
     // The {...rest} props define its dimensions and background.
-    <motion.div 
-      className="relative overflow-hidden" 
-      {...rest}
-    >
+    <motion.div className='relative overflow-hidden' {...rest}>
       {/* The Animated Border Element (the line itself) */}
-      <motion.div
-        className={borderClassName}
-        initial={initial}
-        animate={animate}
-        transition={borderTransition}
-      />
-      
+      <motion.div className={borderClassName} initial={initial} animate={animate} transition={borderTransition} />
+
       {/* Content */}
       {/* <div className="relative z-10"> */}
-        {children}
+      {children}
       {/* </div> */}
     </motion.div>
   );
 };
 
 export default BorderDrawWrapper;
-
 
 // --- Example Usage ---
 /*

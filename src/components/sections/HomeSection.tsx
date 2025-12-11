@@ -25,13 +25,13 @@ const HomeSection: React.FC<HomeProps> = () => {
   }, []);
 
   return (
-    <section id={'home'} className='h-full md:h-screen w-full'>
-      <div className='relative flex h-[100%] w-full'>
-        {isMobile && <BorderWrapper class='h-full left-[10%]'/>}
+    <section id={'home'} className='h-screen w-full pt-[20%] md:pt-0'>
+      <div className='relative flex h-full w-full'>
+        {isMobile && <BorderWrapper class='left-[10%] h-full' />}
         {isMobile ? (
           <div className='flex h-full basis-[15%] flex-col'>
             <div className='relative basis-[90%]'>
-              <p className='absolute text-8xl text-[var(--primary-grey)] z-50'>01.</p>
+              <p className='absolute z-50 text-8xl text-[var(--primary-grey)]'>01.</p>
             </div>
             <div className='basis-[10%]'></div>
           </div>
@@ -39,7 +39,7 @@ const HomeSection: React.FC<HomeProps> = () => {
           <div className='flex basis-[55%] flex-col'>
             <div className='basis-[15%]'>
               <p className='mr-[20%] ml-[15%] flex h-full items-center text-sm font-bold tracking-wider text-[var(--secondary-grey)]'>
-                <span className='text-[var(--golden)] flex items-center justify-center pl-[10%] text-center text-4xl'>
+                <span className='flex items-center justify-center pl-[10%] text-center text-4xl text-[var(--golden)]'>
                   *
                 </span>
                 &nbsp;GANESH PANDIAN
@@ -62,7 +62,7 @@ const HomeSection: React.FC<HomeProps> = () => {
             </div>
             <div className='flex basis-[15%]'>
               <div className='basis-[15%]' />
-              <div className='flex h-full basis-[65%] items-center  text-xs text-[var(--secondary-grey)]'>
+              <div className='flex h-full basis-[65%] items-center text-xs text-[var(--secondary-grey)]'>
                 <p className='pl-[10%] font-semibold tracking-wide'>
                   EVERY GREAT DESIGN BEGINS WITH AN EVEN BETTER STORY.
                 </p>
@@ -76,7 +76,7 @@ const HomeSection: React.FC<HomeProps> = () => {
         <div className='flex basis-[85%] flex-col md:basis-[45%]'>
           {!isMobile && <div className='basis-[15%]'></div>}
           <div
-            className={`relative flex justify-center basis-[90%] md:basis-[70%] flex-col ${isMobile ? 'bg-opacity-10 bg-[url(/bg2.jpg)] bg-cover dark:bg-[url(/bg4.jpg)]' : ''}`}
+            className={`relative flex basis-[90%] flex-col justify-center md:basis-[70%] ${isMobile ? 'bg-opacity-10 bg-[url(/bg2.jpg)] bg-cover dark:bg-[url(/bg4.jpg)]' : ''}`}
           >
             <div className='absolute inset-0 bg-black/60 dark:bg-white/90' />
             <div className='relative z-20 flex h-full flex-col justify-center gap-6 p-[10%] md:basis-[70%] md:items-end md:pr-[15%] md:text-end'>
@@ -92,7 +92,7 @@ const HomeSection: React.FC<HomeProps> = () => {
               </div>
             </div>
           </div>
-          <div className='flex items-center basis-[10%] md:basis-[15%] md:basis-[15%]'>
+          <div className='flex basis-[10%] items-center md:basis-[15%]'>
             {isMobile && (
               <p className='pl-[10%] text-sm font-semibold tracking-wide text-[var(--secondary-grey)]'>
                 EVERY GREAT DESIGN BEGINS WITH AN EVEN BETTER STORY.

@@ -2,10 +2,10 @@
 
 import Image from 'next/image';
 import React, { useRef, useState, useEffect } from 'react';
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 interface SwipeProps {
-    text: string;
+  text: string;
 }
 const SwipeToAction: React.FC<SwipeProps> = (props) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,7 +68,7 @@ const SwipeToAction: React.FC<SwipeProps> = (props) => {
       {/* Container */}
       <div
         ref={containerRef}
-        className="w-full h-[60px] bg-[var(--golden)] border border-[var(--primary)] rounded-[30px] relative overflow-hidden select-none sm:h-[40px] sm:rounded-[20px]"
+        className='relative h-[60px] w-full overflow-hidden rounded-[30px] border border-[var(--primary)] bg-[var(--golden)] select-none sm:h-[40px] sm:rounded-[20px]'
       >
         {/* Slider */}
         <div
@@ -78,27 +78,20 @@ const SwipeToAction: React.FC<SwipeProps> = (props) => {
             left: `${sliderX}px`,
             transition: sliderX === 0 ? 'left 0.3s ease' : 'none',
           }}
-          className="absolute top-0 flex items-center justify-center cursor-grab touch-none 
-                     w-[58px] h-[58px] bg-[var(--primary)] border border-[var(--golden)] rounded-full 
-                     sm:w-[38px] sm:h-[38px]"
+          className='absolute top-0 flex h-[58px] w-[58px] cursor-grab touch-none items-center justify-center rounded-full border border-[var(--golden)] bg-[var(--primary)] sm:h-[38px] sm:w-[38px]'
         >
-            <MdKeyboardDoubleArrowRight />
+          <MdKeyboardDoubleArrowRight />
           {/* <Image alt="swipeArrow" src={'/arrow.png'} width={25} height={25} /> */}
         </div>
 
         {/* Text */}
-        <div className="text-center uppercase text-sm font-semibold tracking-wider text-[var(--secondary)] pointer-events-none leading-[60px] sm:text-sm sm:leading-[40px]">
+        <div className='pointer-events-none text-center text-sm leading-[60px] font-semibold tracking-wider text-[var(--secondary)] uppercase sm:text-sm sm:leading-[40px]'>
           {props.text}
         </div>
       </div>
 
       {/* Hidden download link */}
-      <a
-        ref={downloadLinkRef}
-        href="/cv.pdf"
-        download="YourFile.pdf"
-        className="hidden"
-      >
+      <a ref={downloadLinkRef} href='/cv.pdf' download='YourFile.pdf' className='hidden'>
         Download
       </a>
     </>

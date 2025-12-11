@@ -29,31 +29,31 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   const socialMedia = () => {
-      return (
-        <div className='flex flex-col space-y-6'>
-          <a
-            href='https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b'
-            className='text-gray-600 hover:text-blue-500'
-            target='_blank'
-          >
-            <FaLinkedin color='var(--secondary)' className='h-4 w-4'/>
-          </a>
-          <a href='https://github.com/soundarganesh' className='text-gray-600 hover:text-blue-500' target='_blank'>
-            <FaGithub color='var(--secondary)' className='h-4 w-4' />
-          </a>
-          <a href='mailto:soundar.ganesh@gmail.com' className='text-gray-600 hover:text-blue-500' target='_blank'>
-            <FaMailBulk color='var(--secondary)' className='h-4 w-4' />
-          </a>
-        </div>
-      );
-    };
+    return (
+      <div className='flex flex-col space-y-6'>
+        <a
+          href='https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b'
+          className='text-gray-600 hover:text-blue-500'
+          target='_blank'
+        >
+          <FaLinkedin color='var(--secondary)' className='h-4 w-4' />
+        </a>
+        <a href='https://github.com/soundarganesh' className='text-gray-600 hover:text-blue-500' target='_blank'>
+          <FaGithub color='var(--secondary)' className='h-4 w-4' />
+        </a>
+        <a href='mailto:soundar.ganesh@gmail.com' className='text-gray-600 hover:text-blue-500' target='_blank'>
+          <FaMailBulk color='var(--secondary)' className='h-4 w-4' />
+        </a>
+      </div>
+    );
+  };
 
   return (
     <section className='fixed top-0 z-100 flex h-[10%] w-full border-b-2 border-[var(--primary-grey)] bg-[var(--primary)] md:right-0 md:h-full md:w-[7%] md:flex-col md:border-l-2'>
       {isMobile ? (
         <div className='relative flex h-full w-full'>
-          <BorderWrapper class='h-full left-[10%]'/>
-          <BorderWrapper class='h-full right-[20%]'/>
+          <BorderWrapper class='left-[10%] h-full' />
+          <BorderWrapper class='right-[20%] h-full' />
           <div className='basis-[10%]' />
           <div className='basis-[70%]'>
             <p className='flex h-full items-center pr-[20%] text-sm font-bold tracking-wider text-[var(--secondary-grey)]'>
@@ -63,17 +63,16 @@ const Header: React.FC<HeaderProps> = () => {
               &nbsp;GANESH PANDIAN
             </p>
           </div>
-          <div
-            className='flex basis-[20%] items-center justify-center'
-            onClick={() => setOpenMenu(!openMenu)}
-          >
+          <div className='flex basis-[20%] items-center justify-center' onClick={() => setOpenMenu(!openMenu)}>
             <CiMenuKebab size={25} />
           </div>
         </div>
       ) : (
-        <div className='relative h-full flex flex-col'>
-          <div className='basis-[30%] border-b-2 border-[var(--primary-grey)] flex items-center justify-center'>{socialMedia()}</div>
-          <div className='basis-[70%] flex flex-col justify-between py-[40%]'>
+        <div className='relative flex h-full flex-col'>
+          <div className='flex basis-[30%] items-center justify-center border-b-2 border-[var(--primary-grey)]'>
+            {socialMedia()}
+          </div>
+          <div className='flex basis-[70%] flex-col justify-between py-[40%]'>
             {menuConfig.map((menu: menuType) => (
               <div
                 key={menu?.id}
