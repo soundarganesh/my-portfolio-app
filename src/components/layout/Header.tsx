@@ -1,11 +1,13 @@
+'use client';
+
 import { menuConfig } from '@/src/lib/constants';
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
 import { menuType } from '@/src/types/type';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { motion } from 'framer-motion';
 import { TfiClose } from 'react-icons/tfi';
-import { FaGithub, FaLinkedin, FaMailBulk, FaTwitter } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaMailBulk } from 'react-icons/fa';
 import { BorderWrapper } from '../common/BorderWrapper';
 
 interface HeaderProps {}
@@ -15,6 +17,27 @@ const Header: React.FC<HeaderProps> = () => {
   const isMobile = device === 'mobile';
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<string>('home');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const home = document?.getElementById("home")?.offsetTop;
+      const about = document?.getElementById("about")?.offsetTop;
+      const work = document?.getElementById("work")?.offsetTop;
+      console.log("SCROLL ::>",scrollY, home, about, work);
+
+      if (work && scrollY >= work - 100) {
+        setActiveMenu("work");
+      } else if (about && scrollY >= about - 100) {
+        setActiveMenu("about");
+      } else {
+        setActiveMenu("home");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const onMenuItemClick = (item: menuType) => {
     setActiveMenu(item?.id);
@@ -41,7 +64,7 @@ const Header: React.FC<HeaderProps> = () => {
         <a href='https://github.com/soundarganesh' className='text-gray-600 hover:text-blue-500' target='_blank'>
           <FaGithub color='var(--secondary)' className='h-4 w-4' />
         </a>
-        <a href='mailto:soundar.ganesh@gmail.com' className='text-gray-600 hover:text-blue-500' target='_blank'>
+        <a href='mailto:soundar.ganesh@gmail.com' className='text-gray-600 hover:text-blue-500'>
           <FaMailBulk color='var(--secondary)' className='h-4 w-4' />
         </a>
       </div>

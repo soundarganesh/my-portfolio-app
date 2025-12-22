@@ -20,14 +20,11 @@ const AboutSection: React.FC<AboutProps> = () => {
   };
 
   return (
-    <section id='about' className='relative h-screen w-full pt-[20%] md:pt-0'>
-      {/* <div className='h-full w-full'> */}
+    <section id='about' className='relative h-max w-full pt-[20%] md:pt-0'>
       <p className='absolute z-50 text-8xl text-[var(--primary-grey)] md:pl-[11%]'>02.</p>
-      <BorderWrapper class='top-[22%] md:top-[15%] w-full' />
       <BorderWrapper class='left-[10%] h-full' />
-      {/* </div> */}
       <div className='flex h-full w-full flex-col'>
-        <div className='flex items-center justify-center py-[10%] md:py-[3%] pr-[10%] pl-[15%] text-2xl font-bold tracking-wider'>
+        <div className='flex items-center justify-center py-[10%] md:py-[3%] pr-[10%] pl-[15%] text-2xl font-bold tracking-wider border-b-2 border-[var(--primary-grey)]'>
           <p>ABOUT ME</p>
         </div>
         <div className='flex flex-col gap-8 md:gap-12 p-[10%] pl-[15%] md:py-[5%] md:pl-[20%] md:text-center text-base text-[var(--secondary-grey)] md:text-lg'>
@@ -44,16 +41,16 @@ const AboutSection: React.FC<AboutProps> = () => {
           </div>
           <div className='pt-[10%] md:pt-[5%] flex flex-col md:flex-row tracking-wide gap-8'>
             <div className='flex flex-col gap-6'>
-              <p className='text-sm font-bold text-[var(--secondary-grey)]'>PUBLICATIONS</p>
-              <div className='px-[5%] border-1 border-[var(--primary-grey)] divide-y-1 divide-[var(--primary-grey)]'>
-              <p className='p-4'>Federated Learning: Privacy-First AI for Business Innovation (LTIMindtree)</p>
-              <p className='p-4'>AI Evaluation and Explainability using Agentic Workflow (LTIMindtree)</p>
+              <p className='text-sm font-bold text-[var(--secondary)]'>PUBLICATIONS</p>
+              <div className='border-2 border-[var(--primary-grey)] md:border-0'>
+              <p className='m-1 p-2 bg-[var(--primary-grey)] rounded'>Federated Learning: Privacy-First AI for Business Innovation (LTIMindtree)</p>
+              <p className='m-1 p-2 bg-[var(--primary-grey)] rounded'>AI Evaluation and Explainability using Agentic Workflow (LTIMindtree)</p>
               </div>
             </div>
             <div className='flex flex-col gap-6'>
-              <p className='text-sm font-bold text-[var(--secondary-grey)]'>CERTIFICATIONS</p>
-              <div className='px-[5%] border-1 border-[var(--primary-grey)] divide-y-1 divide-[var(--primary-grey)]'>
-              <p className='p-4'>Microsoft Azure Fundamentals (AZ-900)</p>
+              <p className='text-sm font-bold text-[var(--secondary)]'>CERTIFICATIONS</p>
+              <div className='border-2 border-[var(--primary-grey)]  md:border-0'>
+              <p className='m-1 p-2 bg-[var(--primary-grey)] rounded'>Microsoft Azure Fundamentals (AZ-900)</p>
               {/* <p className='p-4'>AI Evaluation and Explainability using Agentic Workflow (LTIMindtree)</p> */}
               </div>
             </div>

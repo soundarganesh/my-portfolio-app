@@ -78,7 +78,7 @@ const SwipeToAction: React.FC<SwipeProps> = (props) => {
             left: `${sliderX}px`,
             transition: sliderX === 0 ? 'left 0.3s ease' : 'none',
           }}
-          className='absolute top-0 flex h-[58px] w-[58px] cursor-grab touch-none items-center justify-center rounded-full border border-[var(--golden)] bg-[var(--primary)] sm:h-[38px] sm:w-[38px]'
+          className='absolute top-0 flex h-[58px] w-[58px] cursor-grab touch-none items-center justify-center rounded-full border border-[var(--golden)] bg-[var(--primary-grey)] sm:h-[38px] sm:w-[38px]'
         >
           <MdKeyboardDoubleArrowRight />
           {/* <Image alt="swipeArrow" src={'/arrow.png'} width={25} height={25} /> */}
