@@ -3,14 +3,14 @@
 import { menuConfig } from '@/src/lib/constants';
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
 import { menuType } from '@/src/types/type';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { motion } from 'framer-motion';
 import { TfiClose } from 'react-icons/tfi';
 import { FaGithub, FaLinkedin, FaMailBulk } from 'react-icons/fa';
 import { BorderWrapper } from '../common/BorderWrapper';
 
-interface HeaderProps {}
+interface HeaderProps { }
 
 const Header: React.FC<HeaderProps> = () => {
   const device: DeviceType = useDeviceType();
@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = () => {
       const home = document?.getElementById("home")?.offsetTop;
       const about = document?.getElementById("about")?.offsetTop;
       const work = document?.getElementById("work")?.offsetTop;
-      console.log("SCROLL ::>",scrollY, home, about, work);
+      console.log("SCROLL ::>", scrollY, home, about, work);
 
       if (work && scrollY >= work - 100) {
         setActiveMenu("work");
@@ -79,9 +79,9 @@ const Header: React.FC<HeaderProps> = () => {
           <BorderWrapper class='right-[20%] h-full' />
           <div className='basis-[10%]' />
           <div className='basis-[70%]'>
-            <p className='flex h-full items-center pr-[20%] text-sm font-bold tracking-wider text-[var(--secondary-grey)]'>
+            <p className='flex h-full items-center pr-[20%] text-sm font-bold tracking-wider text-gradient-purple '>
               <span className='flex items-center justify-center pl-[10%] text-center text-4xl text-[var(--golden)]'>
-                *
+
               </span>
               &nbsp;GANESH PANDIAN
             </p>
@@ -97,12 +97,14 @@ const Header: React.FC<HeaderProps> = () => {
           </div>
           <div className='flex basis-[70%] flex-col justify-between py-[40%]'>
             {menuConfig.map((menu: menuType) => (
-              <div
-                key={menu?.id}
-                className={`flex w-full cursor-pointer justify-center border-l-6 ${activeMenu === menu?.id ? `border-[var(--golden)]` : `border-[var(--primary)] text-[var(--secondary-grey)]`} py-6 text-sm font-semibold`}
-                onClick={() => onMenuItemClick(menu)}
-              >
-                <p className='rotate-270'>{menu?.title?.toUpperCase()}</p>
+              <div className='flex w-full justify-center' key={menu?.id}>
+                <div className={`h-full w-2 rounded ${activeMenu === menu?.id ? `button-bg-gradient ` : `bg-[var(--primary)] `}`} />
+                <div
+                  className={`flex w-full cursor-pointer justify-center py-6 text-sm font-semibold ${activeMenu === menu?.id ? `text-[var(--secondary)]` : `text-[var(--text-grey)]`}`}
+                  onClick={() => onMenuItemClick(menu)}
+                >
+                  <p className='rotate-270'>{menu?.title}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -124,9 +126,9 @@ const Header: React.FC<HeaderProps> = () => {
                       0{index + 1}.
                     </div>
                     <p
-                      className={`flex basis-[80%] items-center justify-center py-6 text-sm font-semibold ${activeMenu === menu?.id ? `border-b-6 border-[var(--golden)]` : `border-b-2 border-[var(--primary-grey)] text-[var(--secondary-grey)]`}`}
+                      className={`flex basis-[80%] items-center justify-center py-6 text-sm font-semibold ${activeMenu === menu?.id ? `border-b-6 border-bg-gradient` : `border-b-2 border-[var(--primary-grey)] text-[var(--text-grey)]`}`}
                     >
-                      {menu?.title?.toUpperCase()}
+                      {menu?.title}
                     </p>
                   </div>
                 ))}
