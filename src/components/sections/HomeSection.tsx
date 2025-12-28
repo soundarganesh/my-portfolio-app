@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
+import React from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
 import { getYearsOfExperience } from '@/src/lib/utils';
 import { BorderWrapper } from '../common/BorderWrapper';
@@ -122,7 +122,7 @@ const HomeSection: React.FC<HomeProps> = () => {
           >
             <motion.div variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}>
               <h2 className="text-[var(--golden)] text-sm md:text-lg tracking-[0.3em] font-bold uppercase mb-4">
-                Portfolio 2024
+                Portfolio {new Date().getFullYear()}
               </h2>
             </motion.div>
 
@@ -142,6 +142,18 @@ const HomeSection: React.FC<HomeProps> = () => {
             >
               From brackets to brilliance — crafting sophisticated, scalable, and immersive web experiences.
             </motion.p>
+
+            {/* Mobile Experience Indicator */}
+            <motion.div
+              variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+              className="block md:hidden mb-10 text-left w-full"
+            >
+              <div className='flex items-baseline gap-2'>
+                <span className='text-5xl font-black text-white'>{getYearsOfExperience()}</span>
+                <span className='text-sm text-[var(--purple)] font-bold tracking-[0.2em] uppercase'>Years of <br /> Experience</span>
+              </div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[var(--purple)] to-[var(--golden)] mt-4 rounded-full" />
+            </motion.div>
 
             <motion.div variants={{ hidden: { opacity: 0, scale: 0.9 }, visible: { opacity: 1, scale: 1 } }}>
               <a href="#about" className="group relative px-8 py-4 rounded-full overflow-hidden button-bg-gradient inline-block shadow-lg hover:shadow-[0_0_20px_rgba(189,52,254,0.4)] transition-shadow duration-300">

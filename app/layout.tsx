@@ -1,10 +1,9 @@
-'use client';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { LXGW_WenKai_TC, Montserrat } from 'next/font/google';
 import { Inter, Manrope } from 'next/font/google';
 import './globals.css';
 import Header from '@/src/components/Layout/Header';
-import { ParallaxProvider } from 'react-scroll-parallax';
+import { Providers } from './providers';
 
 // Load the fonts
 const montserrat = Montserrat({
@@ -32,10 +31,18 @@ const lubrifont = LXGW_WenKai_TC({
   display: 'swap',
 });
 
-// export const metadata: Metadata = {
-//   title: 'Ganesh Pandian',
-//   description: 'Portfolio application',
-// }
+export const metadata: Metadata = {
+  title: 'Ganesh Pandian',
+  description: 'Portfolio application',
+  manifest: '/manifest.json',
+  icons: {
+    apple: "/icon-512x512.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#000000',
+};
 
 export default function RootLayout({
   children,
@@ -45,10 +52,8 @@ export default function RootLayout({
   return (
     <html lang='en' className={`${inter.variable} ${manrope.variable} scroll-smooth`}>
       <body>
-        <ParallaxProvider>
-          <Header />
-          <main className='min-h-screen w-full'>{children}</main>
-        </ParallaxProvider>
+        <Header />
+        <main className='min-h-screen w-full'>{children}</main>
       </body>
     </html>
   );
