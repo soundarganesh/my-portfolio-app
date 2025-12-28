@@ -5,7 +5,7 @@ import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
 import { menuType } from '@/src/types/type';
 import React, { useState, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { TfiClose } from 'react-icons/tfi';
 import { FaGithub, FaLinkedin, FaMailBulk } from 'react-icons/fa';
 import { BorderWrapper } from '../common/BorderWrapper';
@@ -14,28 +14,35 @@ interface HeaderProps { }
 
 const Header: React.FC<HeaderProps> = () => {
   const device: DeviceType = useDeviceType();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isMobile = device === 'mobile';
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<string>('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const home = document?.getElementById("home")?.offsetTop;
-      const about = document?.getElementById("about")?.offsetTop;
-      const work = document?.getElementById("work")?.offsetTop;
-      console.log("SCROLL ::>", scrollY, home, about, work);
+      // Logic: Iterate through sections to find the one currently in view
+      // We check from the bottom up or based on viewport intersection
+      const sections = ['contact', 'works', 'about', 'home'];
 
-      if (work && scrollY >= work - 100) {
-        setActiveMenu("work");
-      } else if (about && scrollY >= about - 100) {
-        setActiveMenu("about");
-      } else {
-        setActiveMenu("home");
+      for (const id of sections) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Debugging
+          console.log(`Section ${id}: top=${rect.top}, bottom=${rect.bottom}`);
+
+          if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
+            setActiveMenu(id);
+            console.log('Active ID:', id);
+            break; // Found the topmost visible section
+          }
+        }
       }
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check on mount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -54,39 +61,63 @@ const Header: React.FC<HeaderProps> = () => {
   const socialMedia = () => {
     return (
       <div className='flex flex-col space-y-6'>
-        <a
+        <motion.a
+          whileHover={{ scale: 1.2, color: '#0077b5' }} // LinkedIn Blue
+          transition={{ type: "spring", stiffness: 300 }}
           href='https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b'
-          className='text-gray-600 hover:text-blue-500'
+          className='text-gray-600'
           target='_blank'
         >
-          <FaLinkedin color='var(--secondary)' className='h-4 w-4' />
-        </a>
-        <a href='https://github.com/soundarganesh' className='text-gray-600 hover:text-blue-500' target='_blank'>
-          <FaGithub color='var(--secondary)' className='h-4 w-4' />
-        </a>
-        <a href='mailto:soundar.ganesh@gmail.com' className='text-gray-600 hover:text-blue-500'>
-          <FaMailBulk color='var(--secondary)' className='h-4 w-4' />
-        </a>
+          <FaLinkedin className='h-5 w-5' />
+        </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.2, color: '#333' }}
+          transition={{ type: "spring", stiffness: 300 }}
+          href='https://github.com/soundarganesh'
+          className='text-gray-600'
+          target='_blank'
+        >
+          <FaGithub className='h-5 w-5' />
+        </motion.a>
+        <motion.a
+          whileHover={{ scale: 1.2, color: '#EA4335' }} // Gmail Red
+          transition={{ type: "spring", stiffness: 300 }}
+          href='mailto:soundar.ganesh@gmail.com'
+          className='text-gray-600'
+        >
+          <FaMailBulk className='h-5 w-5' />
+        </motion.a>
       </div>
     );
   };
 
-  return (
-    <section className='fixed top-0 z-100 flex h-[10%] w-full border-b-2 border-[var(--primary-grey)] bg-[var(--primary)] md:right-0 md:h-full md:w-[7%] md:flex-col md:border-l-2'>
-      {isMobile ? (
-        <div className='relative flex h-full w-full'>
-          <BorderWrapper class='left-[10%] h-full' />
-          <BorderWrapper class='right-[20%] h-full' />
-          <div className='basis-[10%]' />
-          <div className='basis-[70%]'>
-            <p className='flex h-full items-center pr-[20%] text-sm font-bold tracking-wider text-gradient-purple '>
-              <span className='flex items-center justify-center pl-[10%] text-center text-4xl text-[var(--golden)]'>
+  const sideBarVariants: Variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
 
-              </span>
-              &nbsp;GANESH PANDIAN
-            </p>
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: { opacity: 1, x: 0 }
+  };
+
+  return (
+    <section className='fixed top-0 z-[100] flex h-[10%] w-full border-b-2 border-[var(--primary-grey)] bg-[var(--primary)] md:right-0 md:h-full md:w-[7%] md:flex-col md:border-l-2 backdrop-blur-sm bg-opacity-90'>
+      {isMobile ? (
+        <div className='relative flex h-full w-full justify-between items-center px-[5%]'>
+          <div className='text-gradient-purple flex items-center gap-2'>
+            <span className='text-2xl'>G</span>
+            <span className='font-bold tracking-widest text-sm'>GANESH PANDIAN</span>
           </div>
-          <div className='flex basis-[20%] items-center justify-center' onClick={() => setOpenMenu(!openMenu)}>
+
+          <div className='flex items-center justify-center' onClick={() => setOpenMenu(!openMenu)}>
             <CiMenuKebab size={25} />
           </div>
         </div>
@@ -95,50 +126,53 @@ const Header: React.FC<HeaderProps> = () => {
           <div className='flex basis-[30%] items-center justify-center border-b-2 border-[var(--primary-grey)]'>
             {socialMedia()}
           </div>
-          <div className='flex basis-[70%] flex-col justify-between py-[40%]'>
+          <motion.div
+            className='flex basis-[70%] flex-col justify-between py-[40%]'
+            variants={sideBarVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {menuConfig.map((menu: menuType) => (
-              <div className='flex w-full justify-center' key={menu?.id}>
-                <div className={`h-full w-2 rounded ${activeMenu === menu?.id ? `button-bg-gradient ` : `bg-[var(--primary)] `}`} />
+              <motion.div variants={itemVariants} className='flex w-full justify-center group' key={menu?.id}>
+                <div className={`h-full w-1 rounded transition-all duration-300 ${activeMenu === menu?.id ? `button-bg-gradient w-1.5` : `bg-transparent group-hover:bg-[var(--secondary-grey)]`}`} />
                 <div
-                  className={`flex w-full cursor-pointer justify-center py-6 text-sm font-semibold ${activeMenu === menu?.id ? `text-[var(--secondary)]` : `text-[var(--text-grey)]`}`}
+                  className={`flex w-full cursor-pointer justify-center py-6 text-sm font-semibold transition-all duration-300 ${activeMenu === menu?.id ? `text-[var(--secondary)] scale-110` : `text-[var(--text-grey)] group-hover:text-[var(--secondary)]`}`}
                   onClick={() => onMenuItemClick(menu)}
                 >
-                  <p className='rotate-270'>{menu?.title}</p>
+                  <p className='rotate-[270deg] tracking-widest'>{menu?.title}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       )}
       {openMenu && (
         <>
           <motion.div
-            initial={{ y: -750, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className='absolute h-max w-full bg-[var(--primary)]'
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.5, ease: "circInOut" }}
+            className='absolute top-0 left-0 h-screen w-screen bg-[var(--primary)] z-[200] flex flex-col'
           >
-            <div className='flex divide-x-2 divide-[var(--primary-grey)] border-b-6 border-[var(--primary-grey)]'>
-              <div className='flex basis-[80%] flex-col'>
-                {menuConfig.map((menu: menuType, index: number) => (
-                  <div key={menu?.id} className={`flex w-full justify-center`} onClick={() => onMenuItemClick(menu)}>
-                    <div className='flex basis-[18%] items-center justify-center border-r-2 border-b-2 border-[var(--primary-grey)] py-6 text-2xl font-bold text-[var(--primary-grey)]'>
-                      0{index + 1}.
-                    </div>
-                    <p
-                      className={`flex basis-[80%] items-center justify-center py-6 text-sm font-semibold ${activeMenu === menu?.id ? `border-b-6 border-bg-gradient` : `border-b-2 border-[var(--primary-grey)] text-[var(--text-grey)]`}`}
-                    >
-                      {menu?.title}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div
-                className='flex basis-[20%] items-center justify-center border-b-2 border-[var(--primary-grey)]'
-                onClick={() => setOpenMenu(!openMenu)}
-              >
-                <TfiClose size={25} />
-              </div>
+            <div className='flex justify-end p-8'>
+              <TfiClose size={30} onClick={() => setOpenMenu(false)} />
+            </div>
+
+            <div className='flex flex-col items-center justify-center flex-grow gap-8'>
+              {menuConfig.map((menu: menuType, index: number) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                  key={menu?.id}
+                  className={`text-4xl font-black tracking-widest uppercase cursor-pointer ${activeMenu === menu?.id ? 'text-gradient-purple' : 'text-[var(--text-grey)]'}`}
+                  onClick={() => onMenuItemClick(menu)}
+                >
+                  <span className='text-sm font-light text-[var(--secondary-grey)] mr-4'>0{index + 1}.</span>
+                  {menu?.title}
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         </>

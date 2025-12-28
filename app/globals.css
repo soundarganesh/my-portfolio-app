@@ -6,23 +6,8 @@
   --primary-grey: #181818;
   --secondary-grey: #bebdc2;
   --text-grey: #a9a9a9;
-  --golden: #7e1f85;
   --golden: #b48c50;
-  --golden1: #a38c59;
-  --light-pink: #e685ac;
-  --pink: #f3b2cb;
-  --light-green: #99ca92;
-  --light-blue: #eefcfe;
-  --dark-blue: #6ec3e0;
-  --orange: #e46b4e;
-  --light-yellow: #f2edda;
-  --yellow: #e6ca11;
-  --yellow-2: #f0d87d;
   --purple: #9411fd;
-  --light-purple: #cd91fd;
-  --dark-purple: #4d0686;
-  --pink: #821c8a;
-  --green: #dbe5da;
 
   --font-inter: 'Inter', sans-serif;
   --font-manrope: 'Manrope', sans-serif;
@@ -32,12 +17,16 @@
 /* #822659 #b48c50 #ff3d00 #ffb847 cadetblue crimson darkcyan #2596be */
 @media (prefers-color-scheme: dark) {
   :root {
-    --secondary: #000000;
-    --primary: #ffffff;
-    --primary-grey: #f5f5f5;
-    --secondary-grey: #2f2e30;
-
+    --primary: #000000;
+    --secondary: #ffffff;
+    --primary-grey: #181818;
+    --secondary-grey: #bebdc2;
+    --text-grey: #a9a9a9;
     --golden: #b48c50;
+    --purple: #9411fd;
+
+    --font-inter: 'Inter', sans-serif;
+    --font-manrope: 'Manrope', sans-serif;
   }
 }
 

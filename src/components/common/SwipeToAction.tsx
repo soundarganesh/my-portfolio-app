@@ -1,100 +1,89 @@
 'use client';
 
-import Image from 'next/image';
-import React, { useRef, useState, useEffect } from 'react';
-import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import React, { useRef, useState } from 'react';
+import { MdKeyboardDoubleArrowRight, MdCheck } from 'react-icons/md';
+import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 
 interface SwipeProps {
   text: string;
+  onComplete?: () => void;
 }
-const SwipeToAction: React.FC<SwipeProps> = (props) => {
+
+const SwipeToAction: React.FC<SwipeProps> = ({ text, onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const downloadLinkRef = useRef<HTMLAnchorElement>(null);
-  const [sliderX, setSliderX] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const startOffset = useRef(0);
-  const maxX = useRef(0);
+  const x = useMotionValue(0);
+  const [completed, setCompleted] = useState(false);
 
-  useEffect(() => {
-    if (containerRef.current) {
-      maxX.current = containerRef.current.offsetWidth - 60; // container width - slider width
+  // Transform opacity based on drag position
+  const opacity = useTransform(x, [0, 100], [1, 0]);
+
+  const handleAction = () => {
+    if (onComplete) {
+      onComplete();
     }
-  }, []);
-
-  const startDrag = (clientX: number) => {
-    setIsDragging(true);
-    startOffset.current = clientX - sliderX;
   };
 
-  const duringDrag = (clientX: number) => {
-    if (!isDragging) return;
-    const newX = clientX - startOffset.current;
-    setSliderX(Math.max(0, Math.min(maxX.current, newX)));
-  };
+  const handleDragEnd = async (_: unknown, info: PanInfo) => {
+    if (!containerRef.current) return;
+    const containerWidth = containerRef.current.offsetWidth;
+    const sliderWidth = 50; // Approximated
+    const threshold = containerWidth - sliderWidth - 10;
 
-  const endDrag = () => {
-    if (!isDragging) return;
-    if (sliderX >= maxX.current - 10) {
-      downloadLinkRef.current?.click();
+    if (x.get() > threshold / 2) {
+      // Complete the swipe
+      x.set(threshold);
+      setCompleted(true);
+      handleAction();
+
+      // Reset after delay
+      setTimeout(() => {
+        setCompleted(false);
+        x.set(0);
+      }, 2000);
+    } else {
+      // Snap back
+      x.set(0);
     }
-    setIsDragging(false);
-    setSliderX(0);
   };
-
-  const onMouseDown = (e: React.MouseEvent) => startDrag(e.clientX);
-  const onTouchStart = (e: React.TouchEvent) => startDrag(e.touches[0].clientX);
-
-  useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => duringDrag(e.clientX);
-    const onMouseUp = () => endDrag();
-    const onTouchMove = (e: TouchEvent) => duringDrag(e.touches[0].clientX);
-    const onTouchEnd = () => endDrag();
-
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-    window.addEventListener('touchmove', onTouchMove);
-    window.addEventListener('touchend', onTouchEnd);
-
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchend', onTouchEnd);
-    };
-  }, [isDragging, sliderX]);
 
   return (
-    <>
-      {/* Container */}
-      <div
-        ref={containerRef}
-        className='relative h-[60px] w-full overflow-hidden rounded-[30px] button-bg-gradient select-none sm:h-[40px] sm:rounded-[20px]'
+    <div
+      ref={containerRef}
+      className='relative h-[60px] w-full max-w-[300px] overflow-hidden rounded-full button-bg-gradient p-1 select-none shadow-xl'
+    >
+      {/* Background Text */}
+      <motion.div
+        style={{ opacity }}
+        className='absolute inset-0 flex items-center justify-center text-sm font-bold tracking-[0.2em] text-white uppercase pointer-events-none'
       >
-        {/* Slider */}
-        <div
-          onMouseDown={onMouseDown}
-          onTouchStart={onTouchStart}
-          style={{
-            left: `${sliderX}px`,
-            transition: sliderX === 0 ? 'left 0.3s ease' : 'none',
-          }}
-          className='absolute top-0 flex h-[58px] w-[58px] cursor-grab touch-none items-center justify-center rounded-full border border-white bg-white sm:h-[38px] sm:w-[38px]'
-        >
-          <MdKeyboardDoubleArrowRight color='var(--primary)' />
-          {/* <Image alt="swipeArrow" src={'/arrow.png'} width={25} height={25} /> */}
-        </div>
+        {completed ? 'SUCCESS' : text}
+      </motion.div>
 
-        {/* Text */}
-        <div className='pointer-events-none text-center text-sm leading-[60px] font-semibold tracking-wider text-[var(--secondary)] uppercase sm:text-sm sm:leading-[40px]'>
-          {props.text}
-        </div>
-      </div>
-
-      {/* Hidden download link */}
-      <a ref={downloadLinkRef} href='/cv.pdf' download='YourFile.pdf' className='hidden'>
-        Download
-      </a>
-    </>
+      {/* Slider Button */}
+      <motion.div
+        drag={!completed ? "x" : false}
+        dragConstraints={containerRef}
+        dragElastic={0.1}
+        dragMomentum={false}
+        onDragEnd={handleDragEnd}
+        style={{ x }}
+        className='relative flex h-[52px] w-[52px] cursor-grab active:cursor-grabbing items-center justify-center rounded-full bg-white shadow-md z-10'
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        {completed ? (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            <MdCheck size={24} className="text-green-500" />
+          </motion.div>
+        ) : (
+          <MdKeyboardDoubleArrowRight size={24} color='var(--primary)' />
+        )}
+      </motion.div>
+    </div>
   );
 };
 
