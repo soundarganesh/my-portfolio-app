@@ -49,25 +49,25 @@ const SwipeToAction: React.FC<SwipeProps> = ({ text, onComplete }) => {
   return (
     <div
       ref={containerRef}
-      className='relative h-[60px] w-full max-w-[300px] overflow-hidden rounded-full button-bg-gradient p-1 select-none shadow-xl'
+      className='button-bg-gradient relative h-[60px] w-full max-w-[300px] overflow-hidden rounded-full p-1 shadow-xl select-none'
     >
       {/* Background Text */}
       <motion.div
         style={{ opacity }}
-        className='absolute inset-0 flex items-center justify-center text-sm font-bold tracking-[0.2em] text-white uppercase pointer-events-none'
+        className='pointer-events-none absolute inset-0 flex items-center justify-center text-sm font-bold tracking-[0.2em] text-white uppercase'
       >
         {completed ? 'SUCCESS' : text}
       </motion.div>
 
       {/* Slider Button */}
       <motion.div
-        drag={!completed ? "x" : false}
+        drag={!completed ? 'x' : false}
         dragConstraints={containerRef}
         dragElastic={0.1}
         dragMomentum={false}
         onDragEnd={handleDragEnd}
         style={{ x }}
-        className='relative flex h-[52px] w-[52px] cursor-grab active:cursor-grabbing items-center justify-center rounded-full bg-white shadow-md z-10'
+        className='relative z-10 flex h-[52px] w-[52px] cursor-grab items-center justify-center rounded-full bg-white shadow-md active:cursor-grabbing'
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -75,9 +75,9 @@ const SwipeToAction: React.FC<SwipeProps> = ({ text, onComplete }) => {
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           >
-            <MdCheck size={24} className="text-green-500" />
+            <MdCheck size={24} className='text-green-500' />
           </motion.div>
         ) : (
           <MdKeyboardDoubleArrowRight size={24} color='var(--primary)' />

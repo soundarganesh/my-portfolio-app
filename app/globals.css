@@ -11,7 +11,6 @@
 
   --font-inter: 'Inter', sans-serif;
   --font-manrope: 'Manrope', sans-serif;
-
 }
 
 /* #822659 #b48c50 #ff3d00 #ffb847 cadetblue crimson darkcyan #2596be */
@@ -70,7 +69,7 @@ body::-webkit-scrollbar {
 
 @layer utilities {
   .text-gradient-blue {
-    background: radial-gradient(circle 300px at 30% -180%, #41D1FF 0%, #ffffff 100%);
+    background: radial-gradient(circle 300px at 30% -180%, #41d1ff 0%, #ffffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -78,7 +77,7 @@ body::-webkit-scrollbar {
   }
 
   .text-gradient-purple {
-    background: radial-gradient(circle 300px at 30% -180%, #BD34FE 0%, #ffffff 100%);
+    background: radial-gradient(circle 300px at 30% -180%, #bd34fe 0%, #ffffff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -88,7 +87,8 @@ body::-webkit-scrollbar {
 
 @layer utilities {
   .button-bg-gradient {
-    background: radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
+    background:
+      radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
       radial-gradient(140.35% 140.35% at 100% 94.74%, #bd34fe, #bd34fe00),
       radial-gradient(89.94% 89.94% at 18.42% 15.79%, #41d1ff, #41d1ff00);
     box-shadow: 0 1px #ffffffbf inset;
@@ -96,7 +96,8 @@ body::-webkit-scrollbar {
 
   .border-bg-gradient {
     border: 4px solid transparent;
-    background: radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
+    background:
+      radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
       radial-gradient(140.35% 140.35% at 100% 94.74%, #bd34fe, #bd34fe00),
       radial-gradient(89.94% 89.94% at 18.42% 15.79%, #41d1ff, #41d1ff00);
     background-origin: border-box;
@@ -107,7 +108,6 @@ body::-webkit-scrollbar {
     border: 1px solid rgba(189, 52, 254, 0.5);
     background: radial-gradient(1686.42% 113.39% at 83.25% 2.56%, #bd34fe1a, #bd34fe00);
   }
-
 }
 
 @keyframes fadeIn--10 {
