@@ -119,7 +119,7 @@ const AboutSection: React.FC<AboutProps> = () => {
                 {['Federated Learning: Privacy-First AI', 'AI Evaluation using Agentic Workflow'].map((pub, i) => (
                   <div key={i} className="group p-4 rounded-xl bg-[#141414] border border-white/5 hover:border-[var(--purple)]/50 transition-all duration-300">
                     <p className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors">{pub}</p>
-                    <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1 block">LTIMindtree · 2024</span>
+                    <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1 block">LTIMindtree · 2025</span>
                   </div>
                 ))}
               </motion.div>
@@ -129,7 +129,7 @@ const AboutSection: React.FC<AboutProps> = () => {
                 <p className='text-xs font-bold tracking-[0.2em] text-[var(--text-grey)] uppercase'>Certifications</p>
                 <div className="group p-4 rounded-xl bg-[#141414] border border-white/5 hover:border-[var(--golden)]/50 transition-all duration-300">
                   <p className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors">Microsoft Azure Fundamentals (AZ-900)</p>
-                  <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1 block">Microsoft · 2023</span>
+                  <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1 block">Microsoft · 2026</span>
                 </div>
               </motion.div>
             </div>

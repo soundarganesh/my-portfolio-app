@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { LXGW_WenKai_TC, Montserrat } from 'next/font/google';
-import { Inter, Manrope } from 'next/font/google';
+import { LXGW_WenKai_TC, Montserrat, Inter, Manrope } from 'next/font/google';
 import './globals.css';
 import Header from '@/src/components/Layout/Header';
-import { Providers } from './providers';
+import LoaderWrapper from '@/src/components/common/LoaderWrapper';
 
 // Load the fonts
 const montserrat = Montserrat({
@@ -14,8 +13,8 @@ const montserrat = Montserrat({
 
 // Configure Inter font
 const inter = Inter({
-  subsets: ['latin'], // choose subsets you need
-  variable: '--font-inter', // optional: CSS variable
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
 // Configure Manrope
@@ -52,8 +51,10 @@ export default function RootLayout({
   return (
     <html lang='en' className={`${inter.variable} ${manrope.variable} scroll-smooth`}>
       <body>
-        <Header />
-        <main className='min-h-screen w-full'>{children}</main>
+        <LoaderWrapper>
+          <Header />
+          <main className='min-h-screen w-full'>{children}</main>
+        </LoaderWrapper>
       </body>
     </html>
   );
