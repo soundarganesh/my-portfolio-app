@@ -1,8 +1,7 @@
 'use client';
-import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
-import { getYearsOfExperience } from '@/src/lib/utils';
+import { DeviceType, useDeviceType } from '../../lib/useDeviceType';
+import { getYearsOfExperience } from '../../lib/utils';
 import React from 'react';
-import { BorderWrapper } from '../common/BorderWrapper';
 import SwipeToAction from '../common/SwipeToAction';
 import { motion, Variants } from 'framer-motion';
 

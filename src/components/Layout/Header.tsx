@@ -1,8 +1,8 @@
 'use client';
 
-import { menuConfig } from '@/src/lib/constants';
-import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
-import { menuType } from '@/src/types/type';
+import { menuConfig } from '../../lib/constants';
+import { DeviceType, useDeviceType } from '../../lib/useDeviceType';
+import { menuType } from '../../types/type';
 import React, { useState, useEffect } from 'react';
 import { CiMenuKebab } from 'react-icons/ci';
 import { motion, Variants } from 'framer-motion';

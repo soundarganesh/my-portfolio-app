@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { motion, useMotionValue } from 'framer-motion';
-import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
-import { getYearsOfExperience } from '@/src/lib/utils';
+import { DeviceType, useDeviceType } from '../../lib/useDeviceType';
+import { getYearsOfExperience } from '../../lib/utils';
 import { BorderWrapper } from '../common/BorderWrapper';
 
 interface HomeProps { }

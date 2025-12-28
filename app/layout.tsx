@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { LXGW_WenKai_TC, Montserrat, Inter, Manrope } from 'next/font/google';
 import './globals.css';
-import Header from '@/src/components/Layout/Header';
-import LoaderWrapper from '@/src/components/common/LoaderWrapper';
+import Header from '../src/components/Layout/Header';
+import LoaderWrapper from '../src/components/common/LoaderWrapper';
 
 // Load the fonts
 const montserrat = Montserrat({

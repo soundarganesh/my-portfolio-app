@@ -1,8 +1,7 @@
 'use client';
-import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
+import { DeviceType, useDeviceType } from '../../lib/useDeviceType';
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
-import { BorderWrapper } from '../common/BorderWrapper';
 
 interface WorkProps { }
 

@@ -1,5 +1,5 @@
 'use client';
-import { DeviceType, useDeviceType } from '@/src/lib/useDeviceType';
+import { DeviceType, useDeviceType } from '../../lib/useDeviceType';
 import React from 'react';
 import { BorderWrapper } from '../common/BorderWrapper';
 import Link from 'next/link';
