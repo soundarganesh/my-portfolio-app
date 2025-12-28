@@ -8,9 +8,8 @@ import { CiMenuKebab } from 'react-icons/ci';
 import { motion, Variants } from 'framer-motion';
 import { TfiClose } from 'react-icons/tfi';
 import { FaGithub, FaLinkedin, FaMailBulk } from 'react-icons/fa';
-import { BorderWrapper } from '../common/BorderWrapper';
 
-interface HeaderProps {}
+interface HeaderProps { }
 
 const Header: React.FC<HeaderProps> = () => {
   const device: DeviceType = useDeviceType();
@@ -21,28 +20,21 @@ const Header: React.FC<HeaderProps> = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Logic: Iterate through sections to find the one currently in view
-      // We check from the bottom up or based on viewport intersection
       const sections = ['contact', 'works', 'about', 'home'];
-
       for (const id of sections) {
         const element = document.getElementById(id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          // Debugging
-          console.log(`Section ${id}: top=${rect.top}, bottom=${rect.bottom}`);
-
           if (rect.top <= window.innerHeight * 0.3 && rect.bottom >= 0) {
             setActiveMenu(id);
-            console.log('Active ID:', id);
-            break; // Found the topmost visible section
+            break;
           }
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check on mount
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -58,48 +50,33 @@ const Header: React.FC<HeaderProps> = () => {
     }
   };
 
-  const socialMedia = () => {
-    return (
-      <div className='flex flex-col space-y-6'>
+  const socialMedia = () => (
+    <div className='flex flex-col space-y-8'>
+      {[
+        { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b', color: '#0077b5' },
+        { Icon: FaGithub, href: 'https://github.com/soundarganesh', color: '#ffffff' },
+        { Icon: FaMailBulk, href: 'mailto:soundar.ganesh@gmail.com', color: '#EA4335' }
+      ].map(({ Icon, href, color }, i) => (
         <motion.a
-          whileHover={{ scale: 1.2, color: '#0077b5' }} // LinkedIn Blue
-          transition={{ type: 'spring', stiffness: 300 }}
-          href='https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b'
-          className='text-gray-600'
+          key={i}
+          whileHover={{ scale: 1.2, color: color }}
+          whileTap={{ scale: 0.9 }}
+          href={href}
           target='_blank'
+          className='text-gray-500 transition-colors'
         >
-          <FaLinkedin className='h-5 w-5' />
+          <Icon className='h-6 w-6' />
         </motion.a>
-        <motion.a
-          whileHover={{ scale: 1.2, color: '#333' }}
-          transition={{ type: 'spring', stiffness: 300 }}
-          href='https://github.com/soundarganesh'
-          className='text-gray-600'
-          target='_blank'
-        >
-          <FaGithub className='h-5 w-5' />
-        </motion.a>
-        <motion.a
-          whileHover={{ scale: 1.2, color: '#EA4335' }} // Gmail Red
-          transition={{ type: 'spring', stiffness: 300 }}
-          href='mailto:soundar.ganesh@gmail.com'
-          className='text-gray-600'
-        >
-          <FaMailBulk className='h-5 w-5' />
-        </motion.a>
-      </div>
-    );
-  };
+      ))}
+    </div>
+  );
 
   const sideBarVariants: Variants = {
     hidden: { opacity: 0, x: 20 },
     visible: {
       opacity: 1,
       x: 0,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
     },
   };
 
@@ -109,75 +86,90 @@ const Header: React.FC<HeaderProps> = () => {
   };
 
   return (
-    <section className='bg-opacity-90 fixed top-0 z-[100] flex h-[10%] w-full border-b-2 border-[var(--primary-grey)] bg-[var(--primary)] backdrop-blur-sm md:right-0 md:h-full md:w-[7%] md:flex-col md:border-l-2'>
+    <section className='fixed top-0 z-[100] flex w-full md:right-0 md:h-full md:w-[7%] md:flex-col'>
+      {/* Mobile Header */}
       {isMobile ? (
-        <div className='relative flex h-full w-full items-center justify-between px-[5%]'>
-          <div className='text-gradient-purple flex items-center gap-2'>
-            <span className='text-2xl'>G</span>
-            <span className='text-sm font-bold tracking-widest'>GANESH PANDIAN</span>
+        <div className='flex h-[80px] w-full items-center justify-between border-b border-white/10 bg-black/80 px-[5%] backdrop-blur-md'>
+          <div className='flex items-center gap-3'>
+            <span className='text-gradient-purple text-2xl font-black'>G</span>
+            <span className='text-xs font-bold tracking-[0.2em] text-white'>GANESH PANDIAN</span>
           </div>
-
-          <div className='flex items-center justify-center' onClick={() => setOpenMenu(!openMenu)}>
-            <CiMenuKebab size={25} />
+          <div
+            className='flex h-10 w-10 items-center justify-center rounded-full bg-white/5 active:scale-95'
+            onClick={() => setOpenMenu(!openMenu)}
+          >
+            <CiMenuKebab size={24} className='text-white' />
           </div>
         </div>
       ) : (
-        <div className='relative flex h-full flex-col'>
-          <div className='flex basis-[30%] items-center justify-center border-b-2 border-[var(--primary-grey)]'>
+        /* Desktop Sidebar */
+        <motion.div
+          initial={{ x: 100 }}
+          animate={{ x: 0 }}
+          className='relative flex h-full flex-col backdrop-blur-xl bg-black/40 border-l border-white/5 shadow-2xl'
+        >
+          {/* Top: Socials */}
+          <div className='flex basis-[35%] items-end justify-center pb-8 border-b border-white/5'>
             {socialMedia()}
           </div>
+
+          {/* Bottom: Menu Indices */}
           <motion.div
-            className='flex basis-[70%] flex-col justify-between py-[40%]'
+            className='flex basis-[65%] flex-col justify-center gap-12 py-10'
             variants={sideBarVariants}
             initial='hidden'
             animate='visible'
           >
             {menuConfig.map((menu: menuType) => (
-              <motion.div variants={itemVariants} className='group flex w-full justify-center' key={menu?.id}>
+              <motion.div variants={itemVariants} className='group relative flex w-full justify-center' key={menu?.id}>
                 <div
-                  className={`h-full w-1 rounded transition-all duration-300 ${activeMenu === menu?.id ? `button-bg-gradient w-1.5` : `bg-transparent group-hover:bg-[var(--secondary-grey)]`}`}
+                  className={`absolute right-0 top-1/2 h-8 w-1 -translate-y-1/2 rounded-l bg-gradient-to-b from-[var(--purple)] to-[var(--golden)] transition-all duration-300 ${activeMenu === menu?.id ? 'opacity-100' : 'opacity-0'}`}
                 />
                 <div
-                  className={`flex w-full cursor-pointer justify-center py-6 text-sm font-semibold transition-all duration-300 ${activeMenu === menu?.id ? `scale-110 text-[var(--secondary)]` : `text-[var(--text-grey)] group-hover:text-[var(--secondary)]`}`}
+                  className={`flex w-full cursor-pointer justify-center py-4 transition-all duration-300 ${activeMenu === menu?.id ? 'text-white' : 'text-gray-600 group-hover:text-gray-400'}`}
                   onClick={() => onMenuItemClick(menu)}
                 >
-                  <p className='rotate-[270deg] tracking-widest'>{menu?.title}</p>
+                  <p className='rotate-[270deg] text-xs font-bold tracking-[0.3em] uppercase whitespace-nowrap'>{menu?.title}</p>
                 </div>
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       )}
-      {openMenu && (
-        <>
-          <motion.div
-            initial={{ y: '-100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '-100%' }}
-            transition={{ duration: 0.5, ease: 'circInOut' }}
-            className='absolute top-0 left-0 z-[200] flex h-screen w-screen flex-col bg-[var(--primary)]'
-          >
-            <div className='flex justify-end p-8'>
-              <TfiClose size={30} onClick={() => setOpenMenu(false)} />
-            </div>
 
-            <div className='flex flex-grow flex-col items-center justify-center gap-8'>
-              {menuConfig.map((menu: menuType, index: number) => (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 + 0.3 }}
-                  key={menu?.id}
-                  className={`cursor-pointer text-4xl font-black tracking-widest uppercase ${activeMenu === menu?.id ? 'text-gradient-purple' : 'text-[var(--text-grey)]'}`}
-                  onClick={() => onMenuItemClick(menu)}
-                >
-                  <span className='mr-4 text-sm font-light text-[var(--secondary-grey)]'>0{index + 1}.</span>
-                  {menu?.title}
-                </motion.div>
-              ))}
+      {/* Mobile Full Screen Menu */}
+      {openMenu && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className='fixed inset-0 z-[200] flex flex-col bg-black/95 backdrop-blur-xl'
+        >
+          <div className='flex justify-end p-8'>
+            <div
+              className='flex h-12 w-12 items-center justify-center rounded-full bg-white/10 active:scale-90 transition-transform'
+              onClick={() => setOpenMenu(false)}
+            >
+              <TfiClose size={24} className='text-white' />
             </div>
-          </motion.div>
-        </>
+          </div>
+
+          <div className='flex flex-grow flex-col items-center justify-center gap-10'>
+            {menuConfig.map((menu: menuType, index: number) => (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, type: 'spring' }}
+                key={menu?.id}
+                className={`relative cursor-pointer text-4xl font-black tracking-widest uppercase ${activeMenu === menu?.id ? 'text-transparent bg-clip-text bg-gradient-to-r from-[var(--purple)] to-[var(--golden)]' : 'text-gray-500'}`}
+                onClick={() => onMenuItemClick(menu)}
+              >
+                <span className='absolute -left-8 top-0 text-xs font-light text-gray-700'>0{index + 1}</span>
+                {menu?.title}
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       )}
     </section>
   );

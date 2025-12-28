@@ -6,7 +6,7 @@ import { BorderWrapper } from '../common/BorderWrapper';
 import SwipeToAction from '../common/SwipeToAction';
 import { motion, Variants } from 'framer-motion';
 
-interface AboutProps {}
+interface AboutProps { }
 
 const AboutSection: React.FC<AboutProps> = () => {
   const device: DeviceType = useDeviceType();
@@ -18,7 +18,7 @@ const AboutSection: React.FC<AboutProps> = () => {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // Stagger text and items
+        staggerChildren: 0.1,
         delayChildren: 0.2,
       },
     },
@@ -38,128 +38,105 @@ const AboutSection: React.FC<AboutProps> = () => {
   };
 
   return (
-    <section id='about' className='relative h-max w-full pt-[20%] md:pt-0'>
-      {/* Background Number */}
-      <motion.p
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        viewport={{ once: true }}
-        className='absolute z-50 text-8xl font-black text-[var(--primary-grey)] opacity-20 select-none md:pl-[11%]'
-      >
-        02.
-      </motion.p>
+    <section id='about' className='relative min-h-screen w-full overflow-hidden flex flex-col justify-center py-20 md:py-0'>
 
-      <BorderWrapper class='left-[10%] h-full' />
+      {/* Abstract Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,_var(--purple)_0%,_transparent_70%)] blur-[120px] opacity-10"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
-      <div className='flex h-full w-full flex-col'>
-        {/* Title Section */}
-        <div className='flex basis-[15%] items-center justify-center overflow-hidden border-b-2 border-[var(--primary-grey)] py-[10%] pr-[10%] pl-[15%] md:py-[5%]'>
-          <motion.p
-            initial={{ y: '100%' }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.8, ease: 'circOut' }}
+      <div className='relative z-10 grid w-full grid-cols-1 md:grid-cols-12'>
+
+        {/* Left Column: Number & Title */}
+        <div className="md:col-span-3 flex flex-col items-center md:items-start p-[5%] relative">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 0.1, x: 0 }}
             viewport={{ once: true }}
-            className='text-gradient-grey z-50 text-4xl font-black tracking-widest md:text-5xl'
+            className="text-[10rem] md:text-[12rem] font-black text-white leading-none select-none absolute top-0 -left-10 md:left-0 opacity-10"
           >
-            ABOUT ME
-          </motion.p>
+            02.
+          </motion.div>
+
+          <div className="mt-32 md:mt-40 relative z-20">
+            <span className='h-[1px] w-12 bg-[var(--golden)] block mb-4'></span>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-widest uppercase mb-2">About <br /> Me</h2>
+          </div>
         </div>
 
-        {/* Content Section */}
-        <motion.div
-          className='flex flex-col gap-8 p-[10%] pl-[15%] md:gap-12 md:py-[5%] md:pl-[20%]'
-          variants={container}
-          initial='hidden'
-          whileInView='show'
-          viewport={{ once: true, margin: '-50px' }}
-        >
-          {/* Main Text */}
+        {/* Right Content */}
+        <div className="md:col-span-8 p-[5%] md:pl-0 flex flex-col justify-center">
           <motion.div
-            variants={item}
-            className='text-base leading-relaxed tracking-wide text-[var(--text-grey)] md:text-center md:text-lg'
+            variants={container}
+            initial='hidden'
+            whileInView='show'
+            viewport={{ once: true, margin: '-50px' }}
+            className="flex flex-col gap-10"
           >
-            <p>
-              Senior Front-End Engineer with <b className='text-[var(--secondary)]'>{getYearsOfExperience()}+ years</b>{' '}
-              of experience delivering scalable web solutions across Fintech and SaaS. Expert in modern frontend
-              frameworks (<b className='text-[var(--secondary)]'>React, Angular, Next.js</b>) and recently expanded into
-              Full Stack development with a focus on <b className='text-[var(--secondary)]'>AI/LLM integration</b>.
-              Currently architecting AI-driven quality testing platforms using{' '}
-              <b className='text-[var(--secondary)]'>Python/FastAPI</b> to connect advanced LLM agents with intuitive
-              user interfaces. Passionate about solving complex business challenges through user-centric design and
-              cutting-edge AI technologies.
-            </p>
-          </motion.div>
+            {/* Bio */}
+            <motion.div variants={item} className="backdrop-blur-sm bg-white/5 border border-white/10 p-8 rounded-2xl">
+              <p className='text-base md:text-lg leading-relaxed text-gray-300 font-light'>
+                Senior Front-End Engineer with <b className='text-white font-bold'>{getYearsOfExperience()}+ years</b>{' '}
+                of experience delivering scalable web solutions across Fintech and SaaS. Expert in modern frontend
+                frameworks (<b className='text-[var(--golden)]'>React, Next.js</b>) and recently expanded into
+                Full Stack development with a focus on <b className='text-[var(--purple)]'>AI/LLM integration</b>.
+                Currently architecting AI-driven quality testing platforms using{' '}
+                <b className='text-white'>Python/FastAPI</b>. Passionate about solving complex business challenges through user-centric design.
+              </p>
+            </motion.div>
 
-          {/* Action Buttons */}
-          <motion.div variants={item} className='flex flex-col justify-center gap-10 px-[7%] md:flex-row'>
-            <SwipeToAction
-              text='Resume'
-              onComplete={() => {
-                const link = document.createElement('a');
-                link.href = '/resume.pdf';
-                link.download = 'Ganesh_Pandian_Resume.pdf';
-                link.click();
-              }}
-            />
-            <SwipeToAction
-              text='Cover Letter'
-              onComplete={() => {
-                const link = document.createElement('a');
-                link.href = '/cv.pdf'; // Assuming cover letter file
-                link.download = 'Ganesh_Pandian_Cover_Letter.pdf';
-                link.click();
-              }}
-            />
-          </motion.div>
+            {/* Action Buttons */}
+            <motion.div variants={item} className='flex flex-col gap-6 md:flex-row'>
+              <SwipeToAction
+                text='Resume'
+                onComplete={() => {
+                  const link = document.createElement('a');
+                  link.href = '/resume.pdf';
+                  link.download = 'Ganesh_Pandian_Resume.pdf';
+                  link.click();
+                }}
+              />
+              <SwipeToAction
+                text='Cover Letter'
+                onComplete={() => {
+                  const link = document.createElement('a');
+                  link.href = '/cv.pdf';
+                  link.download = 'Ganesh_Pandian_Cover_Letter.pdf';
+                  link.click();
+                }}
+              />
+            </motion.div>
 
-          {/* Certifications & Publications Grid */}
-          <div className='flex flex-col gap-8 pt-[5%] md:flex-row'>
-            {/* Publications */}
-            <div className='flex flex-1 flex-col gap-6'>
-              <motion.p
-                variants={item}
-                className='mb-2 text-center text-sm font-bold tracking-widest text-[var(--text-grey)] uppercase md:text-left'
-              >
-                Publications
-              </motion.p>
-              <div className='flex flex-col gap-4'>
-                {[
-                  'Federated Learning: Privacy-First AI for Business Innovation',
-                  'AI Evaluation and Explainability using Agentic Workflow',
-                ].map((pub, i) => (
-                  <motion.div
-                    variants={item}
-                    key={i}
-                    className='group relative rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#141414] p-4 transition-all duration-300 hover:border-[rgba(255,255,255,0.2)] hover:bg-[#1a1a1a]'
-                  >
-                    <div className='text-sm font-medium text-[var(--text-grey)] transition-colors group-hover:text-[var(--secondary)]'>
-                      {pub} <span className='mt-1 block text-xs opacity-50'>(LTIMindtree)</span>
-                    </div>
-                  </motion.div>
+            {/* Certifications & Publications */}
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+              {/* Publications */}
+              <motion.div variants={item} className='flex flex-col gap-4'>
+                <p className='text-xs font-bold tracking-[0.2em] text-[var(--text-grey)] uppercase'>Publications</p>
+                {['Federated Learning: Privacy-First AI', 'AI Evaluation using Agentic Workflow'].map((pub, i) => (
+                  <div key={i} className="group p-4 rounded-xl bg-[#141414] border border-white/5 hover:border-[var(--purple)]/50 transition-all duration-300">
+                    <p className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors">{pub}</p>
+                    <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1 block">LTIMindtree · 2024</span>
+                  </div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
 
-            {/* Certifications */}
-            <div className='flex flex-1 flex-col gap-6'>
-              <motion.p
-                variants={item}
-                className='mb-2 text-center text-sm font-bold tracking-widest text-[var(--text-grey)] uppercase md:text-left'
-              >
-                Certifications
-              </motion.p>
-              <motion.div
-                variants={item}
-                className='group relative rounded-xl border border-[rgba(255,255,255,0.08)] bg-[#141414] p-4 transition-all duration-300 hover:border-[rgba(255,255,255,0.2)] hover:bg-[#1a1a1a]'
-              >
-                <div className='text-sm font-medium text-[var(--text-grey)] transition-colors group-hover:text-[var(--secondary)]'>
-                  Microsoft Azure Fundamentals (AZ-900)
+              {/* Certifications */}
+              <motion.div variants={item} className='flex flex-col gap-4'>
+                <p className='text-xs font-bold tracking-[0.2em] text-[var(--text-grey)] uppercase'>Certifications</p>
+                <div className="group p-4 rounded-xl bg-[#141414] border border-white/5 hover:border-[var(--golden)]/50 transition-all duration-300">
+                  <p className="text-gray-200 text-sm font-medium group-hover:text-white transition-colors">Microsoft Azure Fundamentals (AZ-900)</p>
+                  <span className="text-[10px] text-gray-500 uppercase tracking-wider mt-1 block">Microsoft · 2023</span>
                 </div>
               </motion.div>
             </div>
-          </div>
-        </motion.div>
+
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );

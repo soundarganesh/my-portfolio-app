@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
-interface ContactProps {}
+interface ContactProps { }
 
 const ContactSection: React.FC<ContactProps> = () => {
   const device: DeviceType = useDeviceType();
@@ -38,77 +38,80 @@ const ContactSection: React.FC<ContactProps> = () => {
   };
 
   return (
-    <section id='contact' className='relative h-screen w-full pt-[20%] md:h-screen md:pt-0'>
-      <motion.p
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        viewport={{ once: true }}
-        className='absolute z-50 text-8xl font-black text-[var(--primary-grey)] opacity-20 select-none md:pl-[11%]'
-      >
-        04.
-      </motion.p>
+    <section id='contact' className='relative min-h-screen w-full overflow-hidden flex flex-col justify-center py-20 md:py-0'>
 
-      <BorderWrapper class='left-[10%] h-full' />
+      {/* Background Orbs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div
+          className="absolute bottom-0 left-[-5%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,_var(--purple)_0%,_transparent_70%)] blur-[120px] opacity-10"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
 
-      <div className='flex h-full w-full flex-col'>
-        <div className='flex basis-[20%] items-center justify-center overflow-hidden border-b-2 border-[var(--primary-grey)] py-[10%] pr-[10%] pl-[15%] md:py-[5%]'>
-          <motion.p
-            initial={{ y: '100%' }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.8, ease: 'circOut' }}
+      <div className='relative z-10 grid w-full grid-cols-1 md:grid-cols-12 h-full content-center'>
+
+        {/* Title Column */}
+        <div className="md:col-span-3 flex flex-col items-center md:items-start p-[5%] relative">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 0.1, x: 0 }}
             viewport={{ once: true }}
-            className='text-gradient-grey z-50 text-center text-4xl font-black tracking-widest uppercase md:text-5xl'
+            className="text-[10rem] md:text-[12rem] font-black text-white leading-none select-none absolute top-0 -left-10 md:left-0 opacity-10"
           >
-            LET'S CONNECT
-          </motion.p>
+            04.
+          </motion.div>
+
+          <div className="mt-32 md:mt-40 relative z-20">
+            <span className='h-[1px] w-12 bg-[var(--golden)] block mb-4'></span>
+            <h2 className="text-4xl md:text-5xl font-black text-white tracking-widest uppercase mb-2">Let's <br /> Connect</h2>
+          </div>
         </div>
 
+
+        {/* Content Column */}
         <motion.div
-          className='flex h-full items-center justify-center p-[10%] pl-[15%] text-center md:py-[5%] md:pl-[20%]'
+          className='md:col-span-8 flex flex-col items-center justify-center p-[5%] text-center'
           variants={container}
           initial='hidden'
           whileInView='show'
           viewport={{ once: true }}
         >
-          <motion.div variants={item} className='flex flex-col items-center gap-6'>
-            <p className='text-lg font-light tracking-wide text-[var(--secondary-grey)] md:text-2xl'>
-              Explore . Create . Inspire Together !
+          <motion.div variants={item} className='flex flex-col items-center gap-8'>
+            <p className='text-lg font-light tracking-widest text-[#BEBDC2] uppercase md:text-xl'>
+              Explore · Create · Inspire
             </p>
+
             <Link
               href='mailto:soundar.ganesh@gmail.com?subject=Hello&body=Hi%20Ganesh'
-              className='text-gradient-blue text-lg font-bold transition-colors duration-300 hover:text-white md:text-4xl'
+              className='group relative'
             >
-              soundar.ganesh@gmail.com
+              <h1 className="text-4xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-[#BEBDC2] hover:to-[var(--purple)] transition-all duration-500">
+                soundar.ganesh<br />@gmail.com
+              </h1>
+              <div className="h-1 w-0 group-hover:w-full bg-[var(--purple)] transition-all duration-500 mx-auto mt-4"></div>
             </Link>
 
-            <motion.div variants={item} className='mt-8 flex gap-8'>
-              <a
-                href='https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b'
-                target='_blank'
-                className='text-[var(--secondary-grey)] transition-all duration-300 hover:scale-125 hover:text-[#0077b5]'
-              >
-                <FaLinkedin size={30} />
-              </a>
-              <a
-                href='https://github.com/soundarganesh'
-                target='_blank'
-                className='text-[var(--secondary-grey)] transition-all duration-300 hover:scale-125 hover:text-white'
-              >
-                <FaGithub size={30} />
-              </a>
-              <a
-                href='https://twitter.com/' // Placeholder or remove if not needed, but often nice to have 3. I'll stick to what I know or just 2.
-                target='_blank'
-                className='text-[var(--secondary-grey)] transition-all duration-300 hover:scale-125 hover:text-[#1DA1F2]'
-              >
-                <FaTwitter size={30} />
-              </a>
+            <motion.div variants={item} className='mt-12 flex gap-10'>
+              {[
+                { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/ganesh-pandian-ramakrishnan-a2415b7b' },
+                { Icon: FaGithub, href: 'https://github.com/soundarganesh' },
+                { Icon: FaTwitter, href: 'https://twitter.com/' }
+              ].map(({ Icon, href }, i) => (
+                <a
+                  key={i}
+                  href={href}
+                  target='_blank'
+                  className='text-[#BEBDC2] hover:text-[var(--purple)] hover:scale-110 transition-all duration-300'
+                >
+                  <Icon size={40} />
+                </a>
+              ))}
             </motion.div>
 
             <motion.div
               variants={item}
-              className='mt-12 text-sm font-light tracking-widest text-[var(--text-grey)] opacity-60'
+              className='mt-24 text-xs font-bold tracking-[0.3em] text-[#555] opacity-60 uppercase'
             >
               <p>© {new Date().getFullYear()} GANESH PANDIAN. ALL RIGHTS RESERVED.</p>
             </motion.div>
